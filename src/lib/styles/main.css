@@ -1,0 +1,373 @@
+/* CSS Variables - IBM Design System Inspired */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #1a1a1a;
+    color: #e1e1e1;
+    
+    /* Typography Variables */
+    --font: 'IBM Plex Mono', 'SF Mono', 'Monaco', 'Menlo', 'Consolas', 'Lucida Console', 'Courier New', monospace;
+    --line: 2.5ch;
+    font-family: var(--font);
+    font-size: 18.9704px;
+    font-weight: 400;
+    line-height: var(--line);
+    letter-spacing: 0.01em;
+    overflow: hidden;
+    
+    /* Color Variables */
+    --c-black: #1a1a1a;
+    --c-white: #e1e1e1;
+    --c-grey: #666666;
+    --c-purple: #c586c0;
+    --c-blue: #569cd6;
+    --c-orange: #ce9178;
+    --c-green: #6a9955;
+    --c-cyan: #9cdcfe;
+}
+
+/* Spacing Utilities */
+.pad {
+  padding: var(--line);
+}
+
+.mb {
+  margin-bottom: var(--line);
+}
+
+.indent {
+  margin-left: 2ch;
+}
+
+/* Layout Classes */
+.hover:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.large {
+  font-size: 68.2933px;
+  line-height: 75.8815px;
+  font-weight: 200;
+}
+
+/* THREE-COLUMN GRID */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 100vh;
+  width: 100vw;
+  background: #1a1a1a;
+  overflow: hidden;
+}
+
+.grid > * {
+  min-height: 0;
+  background: #1a1a1a;
+}
+
+/* COLUMN 1: Terminal - STATIC (No Scroll) */
+.left {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* NO SCROLLING */
+  background: #1a1a1a;
+  padding: var(--line);
+}
+
+/* COLUMN 2: Episode Details - SCROLLABLE */
+.middle {
+  background: #1a1a1a;
+  overflow-y: auto; /* ENABLE SCROLLING */
+  overflow-x: hidden;
+  height: 100vh; /* Full viewport height */
+  
+  /* Hide scrollbar but keep functionality */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE */
+}
+
+.middle::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.middle-content {
+  padding: var(--line);
+  min-height: calc(100vh + 200px); /* Ensure enough content to scroll */
+}
+
+/* COLUMN 3: Episode List - SCROLLABLE */  
+.right {
+  background: #1a1a1a;
+  overflow-y: auto; /* ENABLE SCROLLING */
+  overflow-x: hidden;
+  height: 100vh; /* Full viewport height */
+  
+  /* Hide scrollbar but keep functionality */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE */
+}
+
+.right::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.right-content {
+  padding: var(--line);
+  min-height: calc(100vh + 200px); /* Ensure enough content to scroll */
+}
+
+.code-block {
+  font-family: var(--font);
+}
+
+/* Syntax highlighting colors - VIBRANT SCHEME */
+.keyword {
+  color: #61AFEF; /* Light blue/cyan for 'function' and 'return' */
+}
+
+.function-name {
+  color: #98C379; /* Green for function name */
+}
+
+.param {
+  color: #E06C75; /* Orange/pink for parameter */
+}
+
+.operator {
+  color: var(--c-white);
+}
+
+.string {
+  color: #E5C07B; /* Yellow for string literals */
+}
+
+.brace {
+  color: var(--c-white);
+}
+
+.separator {
+  color: var(--c-grey);
+  margin: 30px 0; /* Increased spacing above and below */
+  padding: 15px 0; /* Additional padding for better visual separation */
+  font-family: var(--font);
+  position: relative; /* For potential visualizer effects */
+  transition: color 0.2s ease; /* Smooth color transitions for audio visualization */
+}
+
+.current-episode {
+  color: var(--c-white);
+}
+
+.control-link {
+  color: #1BEB9E; /* Original bright green */
+  margin-right: 1ch;
+}
+
+.time-line {
+  color: var(--c-white);
+}
+
+.volume-control, .random-link {
+  color: var(--c-cyan); /* Original cyan */
+}
+
+.links-row {
+  margin: 0.5ch 0;
+}
+
+.link-blue {
+  color: var(--c-blue); /* Original blue */
+  margin-right: 1ch;
+}
+
+.link-orange {
+  color: var(--c-orange); /* Original orange */
+  margin-right: 1ch;
+}
+
+.link-purple {
+  color: var(--c-purple); /* Original purple */
+  margin-right: 1ch;
+}
+
+.stat-line {
+  color: var(--c-green); /* Original green */
+  margin: 0.5ch 0;
+}
+
+.episode-title {
+  color: var(--c-white);
+  margin: 0;
+  font-family: var(--font);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.meta-line {
+  color: #1BEB9E; /* Original bright green */
+  margin: 1ch 0;
+}
+
+.play-link, .source-link, .fav-link {
+  color: #1BEB9E; /* Original bright green */
+}
+
+.track {
+  color: var(--c-white);
+  margin: 1ch 0;
+  font-family: var(--font);
+}
+
+.episode-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5ch;
+}
+
+.episode-item {
+    color: #1BEB9E !important;
+    padding: 0.5ch 0;
+    font-family: var(--font);
+    transition: all 0.2s ease;
+    position: relative;
+    display: inline-block;
+    width: fit-content;
+  }
+
+  .episode-item:hover {
+    color: var(--c-white);
+  }
+  
+  .episode-item.current {
+    color: var(--c-white) !important;
+    font-weight: 400;
+  }
+
+  /* Add to your main.css */
+.current-episode {
+    transition: opacity 0.3s ease;
+  }
+  
+  .episode-number {
+    color: #1BEB9E;
+    font-weight: bold;
+  }
+  
+  .episode-title {
+    color: var(--c-white);
+  }
+  
+  .episode-meta {
+    color: #666;
+  }
+  
+  
+  /* Rectangle stays visible for current episode */
+  .episode-item.current::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 2.5ch;
+    background: rgba(0, 255, 0, 0.15);
+    border-radius: 4px;
+    z-index: -1;
+  }
+
+/* Audio visualizer styles */
+.audio-visualizer {
+  color: var(--c-grey);
+  margin: 20px 0;
+  padding: 0;
+  font-family: var(--font);
+  font-size: 18.9704px;
+  font-weight: 400;
+  line-height: var(--line);
+  letter-spacing: 0.01em;
+  transition: all 0.2s ease;
+  position: relative;
+  text-align: left;
+  width: fit-content;
+}
+
+.audio-visualizer.playing {
+  color: var(--c-green); /* Original green when playing */
+}
+
+.visualizer-char {
+  display: inline-block;
+  transition: all 0.1s ease;
+  width: 1ch;
+}
+
+.visualizer-char.active {
+  color: var(--c-green); /* Original green */
+  text-shadow: 0 0 3px var(--c-green); /* Green glow effect */
+  transform: scaleY(1.1);
+}
+
+/* Smooth transitions for episode content changes */
+.episode-meta {
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.track-listing {
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Smooth fade transition states */
+.episode-content-fade-out {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.episode-content-fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .left {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    font-size: 1.11111111vw;
+  }
+  
+  .large {
+    font-size: 4vw;
+    line-height: 1.11111111em;
+  }
+}
+
+/* Force preserve vibrant colors after GSAP animation */
+.keyword { color: #61AFEF !important; }
+.function-name { color: #98C379 !important; }
+.param { color: #E06C75 !important; }
+.operator { color: var(--c-white) !important; }
+.string { color: #E5C07B !important; }
+.brace { color: var(--c-white) !important; }
+.control-link { color: #1BEB9E !important; }
+.volume-control, .random-link { color: var(--c-cyan) !important; }
+.link-blue { color: var(--c-blue) !important; }
+.link-orange { color: var(--c-orange) !important; }
+.link-purple { color: var(--c-purple) !important; }
+.stat-line { color: var(--c-green) !important; }
+.meta-line { color: #1BEB9E !important; }
+.play-link, .source-link, .fav-link { color: #1BEB9E !important; }
+.episode-item { color: #1BEB9E !important; }
+.current-episode { color: var(--c-white) !important; }
+.episode-title { color: var(--c-white) !important; }
+.track { color: var(--c-white) !important; }
+.time-line { color: var(--c-white) !important; }
