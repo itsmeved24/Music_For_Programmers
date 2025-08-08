@@ -38,6 +38,7 @@
 		"vitest-browser-svelte": "^0.1.0"
 	},
 	"dependencies": {
-		"gsap": "^3.13.0"
+		"gsap": "^3.13.0",
+		"screenfull": "^6.0.2"
 	}
 }

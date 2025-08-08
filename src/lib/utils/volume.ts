@@ -16,4 +16,4 @@ export function gainToUi(gain: number): number {
   if (g <= 0) return 0;
   if (g >= 1) return 1;
   return Math.pow(g, 1 / VOLUME_EXPONENT);
-} 
+}

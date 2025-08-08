@@ -17,6 +17,64 @@
   let marqueeContainer: HTMLDivElement | null = null;
   let marqueeItem: HTMLSpanElement | null = null;
   let visualizerWrap: HTMLDivElement | null = null;
+  let appRoot: HTMLElement | null = null;
+
+  // Stats
+  const totalEpisodes = episodes.length;
+  const totalTracks = episodes.reduce((sum, ep) => sum + (ep.tracks?.length ?? 0), 0);
+  const totalDurationSeconds = episodes.reduce((sum, ep) => sum + (ep.duration ?? 0), 0);
+  const totalHours = Math.floor(totalDurationSeconds / 3600);
+  const totalMinutes = Math.floor((totalDurationSeconds % 3600) / 60);
+  const totalSeconds = totalDurationSeconds % 60;
+
+  // Fullscreen toggle
+  let isFullscreen = false;
+  let sf: any = null;
+  function getFullscreenElement(): Element | null {
+    const d: any = typeof document !== 'undefined' ? document : null;
+    return d?.fullscreenElement || d?.webkitFullscreenElement || d?.mozFullScreenElement || d?.msFullscreenElement || null;
+  }
+  function refreshFullscreenState() {
+    if (typeof document === 'undefined') return;
+    isFullscreen = sf?.isEnabled ? !!sf.isFullscreen : !!getFullscreenElement();
+  }
+  async function enterFullscreen() {
+    try {
+      if (sf?.isEnabled) {
+        await sf.request(appRoot ?? document.documentElement);
+      } else {
+        const root: any = (appRoot as any) ?? (typeof document !== 'undefined' ? document.documentElement : null);
+        if (root && !getFullscreenElement()) {
+          if (root.requestFullscreen) await root.requestFullscreen();
+          else if (root.webkitRequestFullscreen) await root.webkitRequestFullscreen();
+          else if (root.mozRequestFullScreen) await root.mozRequestFullScreen();
+          else if (root.msRequestFullscreen) await root.msRequestFullscreen();
+        }
+      }
+    } finally {
+      refreshFullscreenState();
+    }
+  }
+  async function exitFullscreen() {
+    try {
+      if (sf?.isEnabled && sf.isFullscreen) {
+        await sf.exit();
+      } else {
+        const d: any = typeof document !== 'undefined' ? document : null;
+        if (d && getFullscreenElement()) {
+          if (d.exitFullscreen) await d.exitFullscreen();
+          else if (d.webkitExitFullscreen) await d.webkitExitFullscreen();
+          else if (d.mozCancelFullScreen) await d.mozCancelFullScreen();
+          else if (d.msExitFullscreen) await d.msExitFullscreen();
+        }
+      }
+    } finally {
+      refreshFullscreenState();
+    }
+  }
+  function toggleFullscreen() {
+    if (isFullscreen) exitFullscreen(); else enterFullscreen();
+  }
 
   function updateMarqueeWidth() {
     if (marqueeContainer) {
@@ -63,12 +121,39 @@
     setTimeout(updateMarqueeWidth, 0);
     if (typeof window !== 'undefined') {
       window.addEventListener('resize', updateMarqueeWidth);
+      
+      const d: any = document;
+      const handler = () => refreshFullscreenState();
+      d.addEventListener('fullscreenchange', handler);
+      d.addEventListener('webkitfullscreenchange', handler);
+      d.addEventListener('mozfullscreenchange', handler);
+      d.addEventListener('MSFullscreenChange', handler);
+      
+      refreshFullscreenState();
+      (window as any).__fsHandler = handler;
+
+      // Lazy-load screenfull if available
+      import('screenfull').then((mod) => {
+        sf = mod?.default ?? mod;
+        if (sf?.isEnabled) {
+          sf.on('change', handler);
+          refreshFullscreenState();
+        }
+      }).catch(() => {});
     }
   });
 
   onDestroy(() => {
     if (typeof window !== 'undefined') {
       window.removeEventListener('resize', updateMarqueeWidth);
+      const d: any = document;
+      const handler = (window as any).__fsHandler;
+      if (handler) {
+        d.removeEventListener('fullscreenchange', handler);
+        d.removeEventListener('webkitfullscreenchange', handler);
+        d.removeEventListener('mozfullscreenchange', handler);
+        d.removeEventListener('MSFullscreenChange', handler);
+      }
     }
   });
 
@@ -210,7 +295,7 @@
 </script>
 
 <svelte:head>
-  <title>musicForProgramming();</title>
+  <title>musicForCoding</title>
   <meta name="description" content="A series of mixes intended for listening while programming to focus the brain and inspire the mind." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -220,7 +305,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </svelte:head>
 
-<div class="grid">
+<div class="grid" bind:this={appRoot}>
   <!-- LEFT COLUMN -->
   <section class="left pad" role="region" aria-label="Left column" on:copy|preventDefault on:cut|preventDefault on:selectstart|preventDefault on:contextmenu|preventDefault>
     <div class="code-block mb">
@@ -279,23 +364,27 @@
       <div class="links-row">
         <span class="link-blue hover">[about]</span> <span class="link-blue hover">[credits]</span> <span class="link-blue hover">[rss.xml]</span>
       </div>
+      <!--
       <div class="links-row">
         <span class="link-orange hover">[patreon]</span> <span class="link-orange hover">[podcasts.apple]</span>
       </div>
+      -->
       <div class="links-row">
         <span class="link-purple hover">[folder.jpg]</span> <span class="link-purple hover">[enterprise mode]</span>
       </div>
       <div class="links-row">
-        <span class="link-purple hover">[invert]</span> <span class="link-purple hover">[fullscreen]</span>
+        <span class="link-purple hover">[invert]</span> <span class="link-purple hover" role="button" tabindex="0" on:click={toggleFullscreen} on:keydown={(e) => e.key==='Enter' && toggleFullscreen()}>
+          {#if isFullscreen}[exit]{:else}[fullscreen]{/if}
+        </span>
       </div>
     </div>
 
     <div class="stats-section">
-      <div class="stat-line">
-      <div class="stat-line">
-      <div class="stat-line">
-      <div class="stat-line">
-      <div class="stat-line">
+      <div class="stat-line">// {totalEpisodes} episodes</div>
+      <div class="stat-line">// {totalTracks} tracks</div>
+      <div class="stat-line">// {totalHours} hours</div>
+      <div class="stat-line">// {totalMinutes} minutes</div>
+      <div class="stat-line">// {totalSeconds} seconds</div>
     </div>
   </section>
 
@@ -387,6 +476,7 @@
           {episodes}
           currentEpisodeNumber={currentEpisode?.number ?? null}
           on:select={(e) => handleEpisodeSelect(e.detail)}
+        />
 
       </div>
     </div>
