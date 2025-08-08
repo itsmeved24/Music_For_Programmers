@@ -54,7 +54,7 @@ html, body {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   background: #1a1a1a;
   overflow: hidden;
 }
@@ -329,23 +329,13 @@ html, body {
 }
 
 @media (max-width: 1024px) {
-  
-  html, body { overflow: auto; }
-
-  
-  .grid { display: block; height: auto; width: 100%; overflow: visible; }
-  .grid > * { min-height: auto; }
-
-  .left, .middle, .right { height: auto; overflow: visible; padding: calc(var(--line) * 0.75); }
+  html, body { overflow-x: hidden; overflow-y: auto; width: 100%; }
+  .grid { display: block; height: auto; width: 100%; overflow-x: hidden; }
+  .grid > * { min-height: auto; max-width: 100%; }
+  .left, .middle, .right { height: auto; overflow-x: hidden; }
+  /* Tighten stacked spacing and remove forced tall content */
+  .left { padding: calc(var(--line) * 0.75); }
   .middle-content, .right-content { padding: calc(var(--line) * 0.75); min-height: auto; }
-
-  
-  body { font-size: 16px; }
-  .large { font-size: 36px; line-height: 1.2; }
-
-  
-  .episode-item { width: 100%; }
-  .audio-visualizer { width: 100%; }
 }
 
 @media (min-width: 1280px) {
@@ -355,7 +345,7 @@ html, body {
 
 @media (max-width: 640px) {
   body { font-size: 15px; }
-  .large { font-size: 28px; }
+  .large { font-size: 28px; line-height: 1.2; }
 }
 
 .keyword { color: #61AFEF !important; }
@@ -398,3 +388,5 @@ html, body {
   outline: 0 !important;
   box-shadow: none !important;
 }
+
+.middle, .left, .right { word-wrap: break-word; overflow-wrap: anywhere; }
