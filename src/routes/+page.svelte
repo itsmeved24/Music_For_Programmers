@@ -302,7 +302,6 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@200;400&display=swap" rel="stylesheet">
   <link rel="icon" href="/favicon.png?v=3" sizes="any" type="image/png">
   <link rel="shortcut icon" href="/favicon.png?v=3" type="image/png">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </svelte:head>
 
 <div class="grid" bind:this={appRoot}>
