@@ -6,7 +6,7 @@ export const EPISODES: Episode[] = [
     number: 75,
     title: "TalhaVibe",
     artist: "TalhaAnjum",
-    url: "https://archive.org/download/music-for-programming-ep75-datassette/Episode75-Datassette.mp3.mp3",
+          url: "https://archive.org/download/music-for-programming-ep75-datassette/Episode75-Datassette.mp3.mp3",
     duration: 5280, // 1:28:00
     description: "TalhaAnjum presents a contemporary blend of ambient textures with subtle rhythmic elements. This episode creates an ideal atmosphere for coding sessions, featuring carefully selected tracks that enhance focus and creative flow without overwhelming the listener.",
     releaseDate: new Date('2024-12-15'),
@@ -21,29 +21,29 @@ export const EPISODES: Episode[] = [
       { artist: "TalhaAnjum", title: "Buffer Overflow" },
       { artist: "Programming Orchestra", title: "Stack Trace" }
     ],
-    fileSize: "156 MB"
+    fileSize: "18 MB"
   },
   {
     id: 2,
     number: 74,
-    title: "NCW",
-    artist: "NCW", 
-    url: "https://archive.org/download/music-for-programming-ep74-ncw/Episode74-NCW.mp3",
+    title: "Minecraft",
+    artist: "C418", 
+    url: "https://archive.org/download/music-for-programming-ep74-minecraft/Episode74-minecraft.mp3",
     duration: 5100, // 1:25:00
-    description: "NCW delivers atmospheric soundscapes with minimal electronic textures. This episode creates a deep, immersive environment perfect for complex problem-solving and extended coding sessions, featuring carefully crafted ambient compositions.",
+    description: "C418's \"Minecraft\" achieves its emotional depth through masterful simplicity. The track is built around a gentle, looping piano motif, whose slow tempo and clean notes create an immediate sense of calm and introspection. This melody is layered over a bed of ambient synthesizer pads, which add a feeling of spaciousness and a touch of beautiful melancholy.",
     releaseDate: new Date('2024-12-01'),
-    tags: ['atmospheric', 'minimal', 'focus', 'ambient', 'electronic'],
+    tags: ['atmospheric', 'minimal', 'focus', 'ambient', 'transcend'],
     tracks: [
-      { artist: "NCW", title: "Void Patterns" },
-      { artist: "NCW", title: "Digital Substrate" },
-      { artist: "Minimal Tech", title: "Clean Architecture" },
-      { artist: "Ambient Code", title: "Function Calls" },
-      { artist: "NCW", title: "Network Protocols" },
-      { artist: "Electronic Flow", title: "Data Streams" },
-      { artist: "NCW", title: "Terminal Sessions" },
-      { artist: "Code Ambient", title: "Debugging Mode" }
+      { artist: "C418", title: "Minecraft" },
+      // { artist: "NCW", title: "Digital Substrate" },
+      // { artist: "Minimal Tech", title: "Clean Architecture" },
+      // { artist: "Ambient Code", title: "Function Calls" },
+      // { artist: "NCW", title: "Network Protocols" },
+      // { artist: "Electronic Flow", title: "Data Streams" },
+      // { artist: "NCW", title: "Terminal Sessions" },
+      // { artist: "Code Ambient", title: "Debugging Mode" }
     ],
-    fileSize: "150 MB"
+    fileSize: "81 MB"
   },
   {
     id: 3,

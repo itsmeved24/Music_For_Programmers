@@ -1,11 +1,10 @@
 <script lang="ts">
-  import { onMount, tick } from 'svelte';
+  import { onMount } from 'svelte';
   import type { Episode } from '$lib/types';
   import { episodes, getEpisodeByNumber } from '$lib/data/episodes';
   import AudioPlayer from '$lib/components/AudioPlayer.svelte';
   import AudioVisualizer from '$lib/components/AudioVisualizer.svelte';
   import { audioActions, playbackState } from '$lib/stores/audioStore';
-  import { gsap } from 'gsap';
   import { fade, fly } from 'svelte/transition';
   import '$lib/styles/main.css';
 
@@ -13,9 +12,21 @@
   let playerRef: AudioPlayer;
 
   onMount(() => {
+    // Set initial episode
     currentEpisode = getEpisodeByNumber(67) || episodes[0];
-    
-    // Start custom scramble animation after page loads
+
+    // Load initial episode into the player once ref is available
+    const tryLoad = () => {
+      if (playerRef && currentEpisode) {
+        console.log('[onMount] loading initial episode', currentEpisode.number);
+        playerRef.loadEpisode(currentEpisode);
+      } else {
+        setTimeout(tryLoad, 50);
+      }
+    };
+    tryLoad();
+
+    // Optional: start your scramble animation if needed
     setTimeout(() => {
       startCustomScrambleAnimation();
     }, 100);
@@ -23,170 +34,161 @@
 
   function startCustomScrambleAnimation() {
     const scrambleChars = "!@#$%^&*()_+-=[]{}|;:,.<>?~`1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    
-    // Define animation sequence (left to right, top to bottom)
     const selectors = [
       '.code-block',
-      '.audio-visualizer', 
-      '.controls-line',
-      '.time-line', 
+      // Exclude interactive elements to preserve Svelte event listeners
+      // '.audio-visualizer',
+      // '.controls-line',
+      // '.time-line',
       '.links-row',
       '.stat-line',
       '.episode-title',
       '.meta-line',
       '.track'
     ];
-
     let delay = 0;
-    
     selectors.forEach(selector => {
       setTimeout(() => {
         const elements = document.querySelectorAll(selector);
         elements.forEach((element, elementIndex) => {
           setTimeout(() => {
-            scrambleElement(element, scrambleChars, 800); // 800ms duration
-          }, elementIndex * 50); // Stagger elements
+            scrambleElement(element as HTMLElement, scrambleChars, 800);
+          }, elementIndex * 50);
         });
       }, delay);
-      delay += 200; // Stagger each selector group
+      delay += 200;
     });
   }
 
-  function scrambleElement(element, chars, duration) {
-    // Store original HTML structure
+  function scrambleElement(element: HTMLElement, chars: string, duration: number) {
     const originalHTML = element.innerHTML;
-    const originalText = element.textContent;
+    const originalText = element.textContent || '';
     const textLength = originalText.length;
     let progress = 0;
     const startTime = Date.now();
-    
     function animate() {
       const elapsed = Date.now() - startTime;
       progress = Math.min(elapsed / duration, 1);
-      
       let scrambledText = '';
-      
       for (let i = 0; i < textLength; i++) {
         if (progress > i / textLength) {
-          // Character is revealed
           scrambledText += originalText[i];
         } else {
-          // Character is still scrambled
           scrambledText += chars[Math.floor(Math.random() * chars.length)];
         }
       }
-      
-      // Temporarily replace content with scrambled text
       element.textContent = scrambledText;
-      
       if (progress < 1) {
         requestAnimationFrame(animate);
       } else {
-        // Animation complete, restore original HTML structure with colors
         element.innerHTML = originalHTML;
       }
     }
-    
     animate();
   }
 
   function handleEpisodeSelect(episode: Episode) {
-    console.log('Episode selected:', episode.number, episode.title);
+    console.log('[handleEpisodeSelect]', episode.number, episode.title);
     currentEpisode = episode;
-    console.log('🎵 Left column should show:', currentEpisode?.number, currentEpisode?.title);
-    
     if (playerRef) {
       playerRef.loadEpisode(episode);
     }
   }
 
   function handlePlayClick() {
+    console.log('[handlePlayClick] playerRef exists:', !!playerRef);
     if (playerRef) {
       playerRef.toggle();
     }
   }
 
-  function handleSeek(event) {
-    if (!$playbackState.duration) return;
-    
-    const progressBar = event.currentTarget;
+  // Progress bar click-to-seek
+  function handleSeek(event: MouseEvent) {
+    console.log('[handleSeek] start');
+    console.log('duration:', $playbackState.duration, 'playerRef:', !!playerRef);
+    if (!$playbackState.duration || !playerRef) {
+      console.warn('[handleSeek] blocked: duration or playerRef missing');
+      return;
+    }
+    const progressBar = event.currentTarget as HTMLElement;
     const rect = progressBar.getBoundingClientRect();
     const clickX = event.clientX - rect.left;
-    const progressWidth = rect.width;
-    const seekTime = (clickX / progressWidth) * $playbackState.duration;
-    
-    if (playerRef) {
-      playerRef.seekTo(seekTime);
-    }
+    const seekTime = (clickX / rect.width) * $playbackState.duration;
+    console.log('[handleSeek] seekTime:', seekTime);
+    playerRef.seekTo(seekTime);
   }
 
+  // Skip +/- 30s
   function handleSkip(seconds: number) {
-    console.log('Skip clicked:', seconds, 'seconds');
-    console.log('Current time:', $playbackState.currentTime);
-    console.log('Player ref exists:', !!playerRef);
-    
-    const newTime = Math.max(0, $playbackState.currentTime + seconds);
-    console.log('New time will be:', newTime);
-    
-    if (playerRef) {
-      playerRef.seekTo(newTime);
-      console.log('SeekTo called with:', newTime);
-    } else {
-      console.log('No player ref available');
+    console.log('[handleSkip] seconds:', seconds, 'playerRef:', !!playerRef, 'duration:', $playbackState.duration, 'currentTime:', $playbackState.currentTime);
+    if (!playerRef) {
+      console.warn('[handleSkip] blocked: no playerRef');
+      return;
     }
+    // Allow skip even if duration not yet in store; AudioPlayer will bound using audioElement.duration
+    const currentTime = $playbackState.currentTime || 0;
+    const tentative = currentTime + seconds;
+    console.log('[handleSkip] tentative:', tentative);
+    playerRef.seekTo(tentative);
+  }
+
+  // Volume controls
+  function handleVolumeDown() {
+    const v = $playbackState.volume ?? 0.7;
+    const newVolume = Math.max(0, v - 0.1);
+    console.log('[volumeDown] from', v, 'to', newVolume);
+    audioActions.setVolume(newVolume);
+  }
+
+  function handleVolumeUp() {
+    const v = $playbackState.volume ?? 0.7;
+    const newVolume = Math.min(1, v + 0.1);
+    console.log('[volumeUp] from', v, 'to', newVolume);
+    audioActions.setVolume(newVolume);
   }
 
   function handlePrevious() {
-    // Go to previous episode
-    if (currentEpisode && episodes.length > 0) {
-      const currentIndex = episodes.findIndex(ep => ep.number === currentEpisode.number);
-      const previousIndex = currentIndex > 0 ? currentIndex - 1 : episodes.length - 1;
-      handleEpisodeSelect(episodes[previousIndex]);
-    }
+    if (!currentEpisode || episodes.length === 0) return;
+    const idx = episodes.findIndex(ep => ep.number === currentEpisode.number);
+    const prevIdx = idx > 0 ? idx - 1 : episodes.length - 1;
+    handleEpisodeSelect(episodes[prevIdx]);
   }
 
   function handleNext() {
-    // Go to next episode
-    if (currentEpisode && episodes.length > 0) {
-      const currentIndex = episodes.findIndex(ep => ep.number === currentEpisode.number);
-      const nextIndex = currentIndex < episodes.length - 1 ? currentIndex + 1 : 0;
-      handleEpisodeSelect(episodes[nextIndex]);
-    }
+    if (!currentEpisode || episodes.length === 0) return;
+    const idx = episodes.findIndex(ep => ep.number === currentEpisode.number);
+    const nextIdx = idx < episodes.length - 1 ? idx + 1 : 0;
+    handleEpisodeSelect(episodes[nextIdx]);
   }
 
-  // Reactive statement to get current playing state
   $: isPlaying = $playbackState.isPlaying;
-  
-  // Debug reactive statement to track currentEpisode changes
-  $: if (currentEpisode) {
-    console.log('🎵 Current episode updated:', currentEpisode.number, currentEpisode.title);
+
+  $: {
+    // High-level state debug
+    console.log('[Reactive] playing:', $playbackState.isPlaying, 'time:', $playbackState.currentTime, 'dur:', $playbackState.duration, 'vol:', $playbackState.volume);
   }
 </script>
 
 <svelte:head>
   <title>musicForProgramming();</title>
-  <meta name="description" content="Datassette presents a series of mixes intended for listening while programming to focus the brain and inspire the mind." />
+  <meta name="description" content="A series of mixes intended for listening while programming to focus the brain and inspire the mind." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@200;400&display=swap" rel="stylesheet">
-  <!-- Only need basic GSAP, no ScrambleText plugin -->
+  <link rel="icon" href="/favicon.png" sizes="any" type="image/png">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </svelte:head>
 
-<!-- THREE-COLUMN GRID -->
 <div class="grid">
-  <!-- COLUMN 1: Colorful Syntax Highlighted Terminal -->
+  <!-- LEFT COLUMN -->
   <section class="left pad">
     <div class="code-block mb">
       <span class="keyword">function</span> <span class="function-name">musicFor</span>(<span class="param">task</span> <span class="operator">=</span> <span class="string">'progra<br />mming'</span>) <span class="brace">&#123;</span> <span class="keyword">return</span> <span class="string">'A series of mi<br />xes intended for listening while<br />$&#123;task&#125; to focus the brain and i<br />nspire the mind.'</span>; <span class="brace">&#125;</span>
     </div>
 
-    <!-- Audio Visualizer -->
     <AudioVisualizer {isPlaying} />
-    <!-- Debug: isPlaying = {isPlaying}, playbackState.isPlaying = {$playbackState.isPlaying} -->
 
     <div class="episode-info mb">
-      <!-- Updated current episode display with reactive key -->
       <div class="current-episode mb">
         {#if currentEpisode}
           {#key currentEpisode.number}
@@ -198,11 +200,12 @@
           Loading episode...
         {/if}
       </div>
-      
+
+      <!-- Controls -->
       <div class="controls-line">
-        <span class="control-link hover" on:click={handlePrevious} on:keydown={(e) => e.key === 'Enter' && handlePrevious()} role="button" tabindex="0">[prev]</span> 
-        <span class="control-link hover" on:click={() => handleSkip(-30)} on:keydown={(e) => e.key === 'Enter' && handleSkip(-30)} role="button" tabindex="0">[-30]</span> 
-        <span class="control-link hover" on:click={handlePlayClick} on:keydown={(e) => e.key === 'Enter' && handlePlayClick()} role="button" tabindex="0">
+        <span class="control-link hover" on:click={handlePrevious} role="button" tabindex="0">[prev]</span> 
+        <span class="control-link hover" on:click={() => handleSkip(-30)} role="button" tabindex="0">[-30]</span> 
+        <span class="control-link hover" on:click={handlePlayClick} role="button" tabindex="0">
           {#if $playbackState.isLoading}
             [loading...]
           {:else if $playbackState.isPlaying}
@@ -211,15 +214,21 @@
             [play]
           {/if}
         </span> 
-        <span class="control-link hover" on:click={() => handleSkip(30)} on:keydown={(e) => e.key === 'Enter' && handleSkip(30)} role="button" tabindex="0">[+30]</span> 
-        <span class="control-link hover" on:click={handleNext} on:keydown={(e) => e.key === 'Enter' && handleNext()} role="button" tabindex="0">[next]</span>
+        <span class="control-link hover" on:click={() => handleSkip(30)} role="button" tabindex="0">[+30]</span> 
+        <span class="control-link hover" on:click={handleNext} role="button" tabindex="0">[next]</span>
       </div>
-      
+
+      <!-- Time/Volume -->
       <div class="time-line">
-        {Math.floor($playbackState.currentTime / 60)}:{String(Math.floor($playbackState.currentTime % 60)).padStart(2, '0')} <span class="volume-control hover">[v-]</span> {Math.round($playbackState.volume * 100)} % <span class="volume-control hover">[v+]</span> <span class="random-link hover">[random]</span>
+        {Math.floor($playbackState.currentTime / 60)}:{String(Math.floor($playbackState.currentTime % 60)).padStart(2, '0')} 
+        <span class="volume-control hover" on:click={handleVolumeDown} role="button" tabindex="0">[v-]</span> 
+        {Math.round(($playbackState.volume ?? 0.7) * 100)} % 
+        <span class="volume-control hover" on:click={handleVolumeUp} role="button" tabindex="0">[v+]</span> 
+        <span class="random-link hover">[random]</span>
       </div>
     </div>
 
+    <!-- Links and stats -->
     <div class="links-section mb">
       <div class="links-row">
         <span class="link-blue hover">[about]</span> <span class="link-blue hover">[credits]</span> <span class="link-blue hover">[rss.xml]</span>
@@ -244,16 +253,13 @@
     </div>
   </section>
 
-  <!-- COLUMN 2: Dynamic Episode Details -->
+  <!-- MIDDLE COLUMN -->
   <section class="middle">
     <div class="middle-content">
       {#if currentEpisode}
         {#key currentEpisode.number}
           <div in:fly="{{ y: 20, duration: 300, delay: 100 }}" out:fade="{{ duration: 200 }}">
-            <!-- DYNAMIC TITLE -->
             <h1 class="episode-title large mb">Episode {currentEpisode.number}: {currentEpisode.title}</h1>
-
-            <!-- EPISODE METADATA -->
             <div class="episode-meta mb">
               <div class="meta-line">
                 <span class="play-link hover" on:click={handlePlayClick} role="button" tabindex="0">
@@ -264,7 +270,7 @@
                   {:else}
                     [play]
                   {/if}
-                </span> 
+                </span>
                 {Math.floor(currentEpisode.duration / 60)}:{String(currentEpisode.duration % 60).padStart(2, '0')}
               </div>
               <div class="meta-line">
@@ -275,17 +281,15 @@
               </div>
             </div>
 
-            <!-- EPISODE DESCRIPTION -->
             <div class="episode-description mb">
               <div class="track description-text">{currentEpisode.description}</div>
             </div>
 
-            <!-- PROGRESS BAR -->
             {#if $playbackState.duration > 0}
               <div class="progress-section mb">
                 <div class="progress-info">
                   <span class="time-display">
-                    {Math.floor($playbackState.currentTime / 60)}:{String(Math.floor($playbackState.currentTime % 60)).padStart(2, '0')} / 
+                    {Math.floor($playbackState.currentTime / 60)}:{String(Math.floor($playbackState.currentTime % 60)).padStart(2, '0')} /
                     {Math.floor($playbackState.duration / 60)}:{String(Math.floor($playbackState.duration % 60)).padStart(2, '0')}
                   </span>
                 </div>
@@ -295,7 +299,6 @@
               </div>
             {/if}
 
-            <!-- TRACK LISTING -->
             <div class="track-listing">
               <div class="track-header">Track Listing:</div>
               {#each currentEpisode.tracks as track, index}
@@ -307,7 +310,6 @@
               {/each}
             </div>
 
-            <!-- EPISODE TAGS -->
             <div class="episode-tags mb">
               <div class="track">Tags: {currentEpisode.tags.join(', ')}</div>
               <div class="track">Released: {currentEpisode.releaseDate.toLocaleDateString()}</div>
@@ -325,21 +327,18 @@
     </div>
   </section>
 
-  <!-- COLUMN 3: Dynamic Episode List -->
+  <!-- RIGHT COLUMN -->
   <section class="right">
     <div class="right-content">
       <div class="episode-list">
         {#each episodes as episode (episode.id)}
-          <div 
+          <div
             class="episode-item hover"
             class:current={currentEpisode?.number === episode.number}
             role="button"
             tabindex="0"
             on:click={() => handleEpisodeSelect(episode)}
             on:keydown={(e) => e.key === 'Enter' && handleEpisodeSelect(episode)}
-            data-episode-number={episode.number}
-            data-current-episode={currentEpisode?.number}
-            data-is-current={currentEpisode?.number === episode.number}
           >
             {String(episode.number).padStart(2, '0')}: {episode.title}
           </div>
@@ -350,3 +349,19 @@
 </div>
 
 <AudioPlayer bind:this={playerRef} />
+
+<style>
+  .episode-number { color: #1BEB9E; font-weight: bold; }
+  .episode-title { color: var(--c-white); }
+  .episode-meta { color: #666; }
+  .current-episode { transition: opacity 0.3s ease; }
+
+  .control-link,
+  .volume-control,
+  .progress-bar {
+    cursor: pointer;
+    pointer-events: auto;
+    position: relative;
+    z-index: 2;
+  }
+</style>

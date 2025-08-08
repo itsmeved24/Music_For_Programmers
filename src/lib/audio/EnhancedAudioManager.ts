@@ -1,6 +1,7 @@
 import type { Episode, AudioConfig } from '../types';
 import { AUDIO_CONFIG } from '../utils/constants';
 import { browser } from '$app/environment';
+import { uiToGain } from '../utils/volume';
 
 export class EnhancedAudioManager {
   private audio: HTMLAudioElement | null = null;
@@ -111,9 +112,10 @@ export class EnhancedAudioManager {
   setVolume(vol: number) {
     if (!browser || !this.audio) return;
     
-    const volume = Math.min(1, Math.max(0, vol));
-    this.audio.volume = volume;
-    if (this.gainNode) this.gainNode.gain.value = volume;
+    const ui = Math.min(1, Math.max(0, vol));
+    const gain = uiToGain(ui);
+    this.audio.volume = gain;
+    if (this.gainNode) this.gainNode.gain.value = gain;
   }
 
   getFrequencyData(): Uint8Array {

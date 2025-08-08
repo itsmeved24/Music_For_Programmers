@@ -7,32 +7,30 @@
   let visualizerText = "____________________________________";
   let interval;
   
-  const symbols = ['_', '-', '=', '≡', '|', '!', '‖', '│'];
+  const symbols = ['_', '-', '=', '≡', '|', '!', '‖', '│', '┃', '┊', '┋', '╎', '╏'];
   
-  // Reactive statement - this is the key
+  // FIXED: Reactive statement that properly detects play state
   $: {
-    console.log('🎨 Visualizer state:', { isPlaying, playbackStateIsPlaying: $playbackState.isPlaying });
-  }
-  
-  $: if (isPlaying && $playbackState.isPlaying) {
-    // Start animation
-    if (!interval) {
-      console.log('🎨 Starting visualizer animation');
-      interval = setInterval(() => {
-        visualizerText = Array(36).fill(0).map((_, i) => {
-          const wave = Math.sin(Date.now() * 0.01 + i * 0.3);
-          const intensity = Math.floor((wave + 1) * (symbols.length - 1) / 2);
-          return symbols[intensity] || '_';
-        }).join('');
-      }, 150);
-    }
-  } else {
-    // Stop animation
-    if (interval) {
-      console.log('🎨 Stopping visualizer animation');
-      clearInterval(interval);
-      interval = null;
-      visualizerText = "____________________________________";
+    console.log('🎨 Visualizer state:', { isPlaying, playbackPlaying: $playbackState.isPlaying });
+    
+    if (isPlaying && $playbackState.isPlaying) {
+      if (!interval) {
+        console.log('🎨 Starting visualizer animation');
+        interval = setInterval(() => {
+          visualizerText = Array(36).fill(0).map((_, i) => {
+            const wave = Math.sin(Date.now() * 0.01 + i * 0.3);
+            const intensity = Math.floor((wave + 1) * (symbols.length - 1) / 2);
+            return symbols[intensity] || '_';
+          }).join('');
+        }, 150);
+      }
+    } else {
+      if (interval) {
+        console.log('🎨 Stopping visualizer animation');
+        clearInterval(interval);
+        interval = null;
+        visualizerText = "____________________________________";
+      }
     }
   }
   
@@ -49,15 +47,15 @@
 
 <style>
   .audio-visualizer {
-    color: #666666;
+    color: #666;
     margin: 20px 0;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 18px;
-    transition: color 0.3s ease;
     letter-spacing: 0.05em;
+    transition: color 0.3s ease;
   }
-
-  .audio-visualizer.playing {
+  
+  .playing {
     color: #6a9955;
     text-shadow: 0 0 5px rgba(106, 149, 85, 0.3);
   }
