@@ -1,21 +1,51 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { onDestroy } from 'svelte';
   import type { Episode } from '$lib/types';
   import { episodes, getEpisodeByNumber } from '$lib/data/episodes';
   import AudioPlayer from '$lib/components/AudioPlayer.svelte';
   import AudioVisualizer from '$lib/components/AudioVisualizer.svelte';
+  import EpisodeList from '$lib/components/EpisodeList.svelte';
   import { audioActions, playbackState } from '$lib/stores/audioStore';
+  import { favourites, favouriteActions } from '$lib/stores/favorites';
   import { fade, fly } from 'svelte/transition';
   import '$lib/styles/main.css';
 
   let currentEpisode: Episode | null = null;
   let playerRef: AudioPlayer;
 
+  let marqueeContainer: HTMLDivElement | null = null;
+  let marqueeItem: HTMLSpanElement | null = null;
+  let visualizerWrap: HTMLDivElement | null = null;
+
+  function updateMarqueeWidth() {
+    if (marqueeContainer) {
+      const baseWidth = visualizerWrap?.offsetWidth || marqueeItem?.offsetWidth || 0;
+      if (baseWidth > 0) {
+        marqueeContainer.style.width = `${baseWidth}px`;
+      }
+    }
+  }
+
   onMount(() => {
-    // Set initial episode
+
+    try {
+      const stamp = Date.now();
+      const rels = ['icon', 'shortcut icon', 'apple-touch-icon'];
+      rels.forEach((rel) => {
+        let link = document.querySelector(`link[rel='${rel}']`) as HTMLLinkElement | null;
+        if (!link) {
+          link = document.createElement('link');
+          link.rel = rel as any;
+          document.head.appendChild(link);
+        }
+        link.href = `/favicon.png?v=${stamp}`;
+        link.type = 'image/png';
+      });
+    } catch {}
+
     currentEpisode = getEpisodeByNumber(67) || episodes[0];
 
-    // Load initial episode into the player once ref is available
     const tryLoad = () => {
       if (playerRef && currentEpisode) {
         console.log('[onMount] loading initial episode', currentEpisode.number);
@@ -26,20 +56,28 @@
     };
     tryLoad();
 
-    // Optional: start your scramble animation if needed
     setTimeout(() => {
       startCustomScrambleAnimation();
     }, 100);
+
+    setTimeout(updateMarqueeWidth, 0);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', updateMarqueeWidth);
+    }
+  });
+
+  onDestroy(() => {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('resize', updateMarqueeWidth);
+    }
   });
 
   function startCustomScrambleAnimation() {
+    if (typeof document === 'undefined') return;
     const scrambleChars = "!@#$%^&*()_+-=[]{}|;:,.<>?~`1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const selectors = [
       '.code-block',
-      // Exclude interactive elements to preserve Svelte event listeners
-      // '.audio-visualizer',
-      // '.controls-line',
-      // '.time-line',
+
       '.links-row',
       '.stat-line',
       '.episode-title',
@@ -93,6 +131,8 @@
     if (playerRef) {
       playerRef.loadEpisode(episode);
     }
+
+    setTimeout(updateMarqueeWidth, 0);
   }
 
   function handlePlayClick() {
@@ -102,7 +142,6 @@
     }
   }
 
-  // Progress bar click-to-seek
   function handleSeek(event: MouseEvent) {
     console.log('[handleSeek] start');
     console.log('duration:', $playbackState.duration, 'playerRef:', !!playerRef);
@@ -118,21 +157,19 @@
     playerRef.seekTo(seekTime);
   }
 
-  // Skip +/- 30s
   function handleSkip(seconds: number) {
     console.log('[handleSkip] seconds:', seconds, 'playerRef:', !!playerRef, 'duration:', $playbackState.duration, 'currentTime:', $playbackState.currentTime);
     if (!playerRef) {
       console.warn('[handleSkip] blocked: no playerRef');
       return;
     }
-    // Allow skip even if duration not yet in store; AudioPlayer will bound using audioElement.duration
+
     const currentTime = $playbackState.currentTime || 0;
     const tentative = currentTime + seconds;
     console.log('[handleSkip] tentative:', tentative);
     playerRef.seekTo(tentative);
   }
 
-  // Volume controls
   function handleVolumeDown() {
     const v = $playbackState.volume ?? 0.7;
     const newVolume = Math.max(0, v - 0.1);
@@ -162,11 +199,14 @@
   }
 
   $: isPlaying = $playbackState.isPlaying;
+  $: isFavourited = currentEpisode ? $favourites.has(currentEpisode.number) : false;
 
   $: {
-    // High-level state debug
+
     console.log('[Reactive] playing:', $playbackState.isPlaying, 'time:', $playbackState.currentTime, 'dur:', $playbackState.duration, 'vol:', $playbackState.volume);
   }
+
+  $: currentEpisode, setTimeout(updateMarqueeWidth, 0);
 </script>
 
 <svelte:head>
@@ -175,26 +215,32 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@200;400&display=swap" rel="stylesheet">
-  <link rel="icon" href="/favicon.png" sizes="any" type="image/png">
+  <link rel="icon" href="/favicon.png?v=3" sizes="any" type="image/png">
+  <link rel="shortcut icon" href="/favicon.png?v=3" type="image/png">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </svelte:head>
 
 <div class="grid">
   <!-- LEFT COLUMN -->
-  <section class="left pad">
+  <section class="left pad" role="region" aria-label="Left column" on:copy|preventDefault on:cut|preventDefault on:selectstart|preventDefault on:contextmenu|preventDefault>
     <div class="code-block mb">
       <span class="keyword">function</span> <span class="function-name">musicFor</span>(<span class="param">task</span> <span class="operator">=</span> <span class="string">'progra<br />mming'</span>) <span class="brace">&#123;</span> <span class="keyword">return</span> <span class="string">'A series of mi<br />xes intended for listening while<br />$&#123;task&#125; to focus the brain and i<br />nspire the mind.'</span>; <span class="brace">&#125;</span>
     </div>
 
+    <div bind:this={visualizerWrap} style="width: fit-content;">
     <AudioVisualizer {isPlaying} />
+    </div>
 
     <div class="episode-info mb">
       <div class="current-episode mb">
         {#if currentEpisode}
           {#key currentEpisode.number}
-            <span class="episode-number">{currentEpisode.number}:</span> 
-            <span class="episode-title">{currentEpisode.title}</span> • 
-            <span class="episode-meta">Episode {currentEpisode.number}</span>
+            <div class="marquee" bind:this={marqueeContainer}>
+              <div class="marquee__track" class:running={$playbackState.isPlaying}>
+                <span class="marquee__item" bind:this={marqueeItem}>• Episode {currentEpisode.number}: {currentEpisode.title} </span>
+                <span class="marquee__item" aria-hidden="true">• Episode {currentEpisode.number}: {currentEpisode.title} </span>
+              </div>
+            </div>
           {/key}
         {:else}
           Loading episode...
@@ -203,9 +249,9 @@
 
       <!-- Controls -->
       <div class="controls-line">
-        <span class="control-link hover" on:click={handlePrevious} role="button" tabindex="0">[prev]</span> 
-        <span class="control-link hover" on:click={() => handleSkip(-30)} role="button" tabindex="0">[-30]</span> 
-        <span class="control-link hover" on:click={handlePlayClick} role="button" tabindex="0">
+        <span class="control-link hover" on:click={handlePrevious} on:keydown={(e) => e.key==='Enter' && handlePrevious()} role="button" tabindex="0">[prev]</span> 
+        <span class="control-link hover" on:click={() => handleSkip(-30)} on:keydown={(e) => e.key==='Enter' && handleSkip(-30)} role="button" tabindex="0">[-30]</span> 
+        <span class="control-link hover" on:click={handlePlayClick} on:keydown={(e) => e.key==='Enter' && handlePlayClick()} role="button" tabindex="0">
           {#if $playbackState.isLoading}
             [loading...]
           {:else if $playbackState.isPlaying}
@@ -214,8 +260,8 @@
             [play]
           {/if}
         </span> 
-        <span class="control-link hover" on:click={() => handleSkip(30)} role="button" tabindex="0">[+30]</span> 
-        <span class="control-link hover" on:click={handleNext} role="button" tabindex="0">[next]</span>
+        <span class="control-link hover" on:click={() => handleSkip(30)} on:keydown={(e) => e.key==='Enter' && handleSkip(30)} role="button" tabindex="0">[+30]</span> 
+        <span class="control-link hover" on:click={handleNext} on:keydown={(e) => e.key==='Enter' && handleNext()} role="button" tabindex="0">[next]</span>
       </div>
 
       <!-- Time/Volume -->
@@ -245,11 +291,11 @@
     </div>
 
     <div class="stats-section">
-      <div class="stat-line">// {episodes.length} episodes</div>
-      <div class="stat-line">// 1309 tracks</div>
-      <div class="stat-line">// 110 hours</div>
-      <div class="stat-line">// 41 minutes</div>
-      <div class="stat-line">// 9 seconds</div>
+      <div class="stat-line">
+      <div class="stat-line">
+      <div class="stat-line">
+      <div class="stat-line">
+      <div class="stat-line">
     </div>
   </section>
 
@@ -274,10 +320,16 @@
                 {Math.floor(currentEpisode.duration / 60)}:{String(currentEpisode.duration % 60).padStart(2, '0')}
               </div>
               <div class="meta-line">
-                <span class="source-link hover">[source]</span> {currentEpisode.fileSize}
+                <a class="source-link hover" href={currentEpisode.sourcePage ?? currentEpisode.url} target="_blank" rel="noopener noreferrer">[source]</a> {currentEpisode.fileSize}
               </div>
               <div class="meta-line">
-                <span class="fav-link hover">[favourite]</span>
+                <span class="fav-link hover" role="button" tabindex="0" on:click={() => currentEpisode && favouriteActions.toggle(currentEpisode.number)} on:keydown={(e) => e.key==='Enter' && currentEpisode && favouriteActions.toggle(currentEpisode.number)}>
+                  {#if isFavourited}
+                    [forget]
+                  {:else}
+                    [favourite]
+                  {/if}
+                </span>
               </div>
             </div>
 
@@ -293,7 +345,7 @@
                     {Math.floor($playbackState.duration / 60)}:{String(Math.floor($playbackState.duration % 60)).padStart(2, '0')}
                   </span>
                 </div>
-                <div class="progress-bar" on:click={handleSeek}>
+                <div class="progress-bar" on:click={handleSeek} role="button" tabindex="0" on:keydown={(e) => e.key==='Enter' && (handleSeek(e as any))}>
                   <div class="progress-fill" style="width: {($playbackState.currentTime / $playbackState.duration) * 100}%"></div>
                 </div>
               </div>
@@ -303,7 +355,7 @@
               <div class="track-header">Track Listing:</div>
               {#each currentEpisode.tracks as track, index}
                 <div class="track">
-                  {String(index + 1).padStart(2, '0')}. {track.artist} - {track.title}
+                  {String(index + 1).padStart(2, '0')}. {track.title} - {track.artist}
                 </div>
               {:else}
                 <div class="track">No track listing available for this episode.</div>
@@ -331,18 +383,11 @@
   <section class="right">
     <div class="right-content">
       <div class="episode-list">
-        {#each episodes as episode (episode.id)}
-          <div
-            class="episode-item hover"
-            class:current={currentEpisode?.number === episode.number}
-            role="button"
-            tabindex="0"
-            on:click={() => handleEpisodeSelect(episode)}
-            on:keydown={(e) => e.key === 'Enter' && handleEpisodeSelect(episode)}
-          >
-            {String(episode.number).padStart(2, '0')}: {episode.title}
-          </div>
-        {/each}
+        <EpisodeList
+          {episodes}
+          currentEpisodeNumber={currentEpisode?.number ?? null}
+          on:select={(e) => handleEpisodeSelect(e.detail)}
+
       </div>
     </div>
   </section>
@@ -364,4 +409,11 @@
     position: relative;
     z-index: 2;
   }
+
+  
+  .marquee { position: relative; overflow: hidden; white-space: nowrap; color: #898989; }
+  .marquee__track { display: inline-flex; gap: 0; will-change: transform; transform: translateX(0); animation: marquee-scroll 18s linear infinite; animation-play-state: paused; }
+  .marquee__track.running { animation-play-state: running; }
+  .marquee__item { display: inline-block; padding: 0; font-family: 'IBM Plex Mono', monospace; font-size: 18px; letter-spacing: 0.05em; }
+  @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 </style>

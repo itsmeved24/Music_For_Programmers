@@ -1,36 +1,31 @@
 <script lang="ts">
+  import type { Episode } from '$lib/types';
   import { createEventDispatcher } from 'svelte';
-  import type { Episode } from '../types';
+  import { favourites } from '$lib/stores/favorites';
 
-  export let episodes: Episode[];
-  export let currentEpisode: Episode | null = null;
+  export let episodes: Episode[] = [];
+  export let currentEpisodeNumber: number | null = null;
 
-  const dispatch = createEventDispatcher<{
-    episodeSelect: Episode;
-  }>();
+  const dispatch = createEventDispatcher<{ select: Episode }>();
 
-  function handleEpisodeClick(episode: Episode) {
-    dispatch('episodeSelect', episode);
+  function handleSelect(episode: Episode) {
+    dispatch('select', episode);
   }
 </script>
 
-<div class="episode-list">
-  {#each episodes as episode}
-    <div 
-      class="episode-item" 
-      class:current={currentEpisode?.number === episode.number}
-      on:click={() => handleEpisodeClick(episode)}
-      on:keydown={(e) => e.key === 'Enter' && handleEpisodeClick(episode)}
-      role="button"
-      tabindex="0"
-    >
-      <span class="episode-number">{episode.number}:</span> 
-      <span class="episode-title" class:highlight={currentEpisode?.number === episode.number}>
-        {episode.title}
-      </span>
-    </div>
-  {/each}
-</div>
+{#each episodes as episode (episode.id)}
+  <div
+    class="episode-item hover"
+    class:current={currentEpisodeNumber === episode.number}
+    class:favourited={$favourites.has(episode.number)}
+    role="button"
+    tabindex="0"
+    on:click={() => handleSelect(episode)}
+    on:keydown={(e) => e.key === 'Enter' && handleSelect(episode)}
+  >
+    {String(episode.number).padStart(2, '0')}: {episode.title}
+  </div>
+{/each}
 
 <style>
   .episode-list {

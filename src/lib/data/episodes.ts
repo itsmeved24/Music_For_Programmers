@@ -6,20 +6,17 @@ export const EPISODES: Episode[] = [
     number: 75,
     title: "TalhaVibe",
     artist: "TalhaAnjum",
-          url: "https://archive.org/download/music-for-programming-ep75-datassette/Episode75-Datassette.mp3.mp3",
-    duration: 5280, // 1:28:00
+    url: "https://archive.org/download/music-for-programming-ep75-datassette/Episode75-TalhaTalwin.mp3",
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 1058, 
     description: "TalhaAnjum presents a contemporary blend of ambient textures with subtle rhythmic elements. This episode creates an ideal atmosphere for coding sessions, featuring carefully selected tracks that enhance focus and creative flow without overwhelming the listener.",
     releaseDate: new Date('2024-12-15'),
     tags: ['electronic', 'ambient', 'focus', 'programming', 'contemporary'],
     tracks: [
-      { artist: "TalhaAnjum", title: "Digital Flow" },
-      { artist: "TalhaAnjum", title: "Code Dreams" },
-      { artist: "Ambient Collective", title: "Processing Loop" },
-      { artist: "Electronic Ensemble", title: "Memory Allocation" },
-      { artist: "TalhaAnjum", title: "Runtime Environment" },
-      { artist: "Digital Artists", title: "Async Operations" },
-      { artist: "TalhaAnjum", title: "Buffer Overflow" },
-      { artist: "Programming Orchestra", title: "Stack Trace" }
+      { title: "Pal-Pal", artist: "Talwiinder" },
+      { title: "Downers at Dusk", artist: "Talha Anjum" },
+      { title: "Afsanay", artist: "Young Stunners" },
+      { title: "Gumaan", artist: "Young Stunners" },
     ],
     fileSize: "18 MB"
   },
@@ -29,7 +26,8 @@ export const EPISODES: Episode[] = [
     title: "Minecraft",
     artist: "C418", 
     url: "https://archive.org/download/music-for-programming-ep74-minecraft/Episode74-minecraft.mp3",
-    duration: 5100, // 1:25:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep74-minecraft",
+    duration: 5100, 
     description: "C418's \"Minecraft\" achieves its emotional depth through masterful simplicity. The track is built around a gentle, looping piano motif, whose slow tempo and clean notes create an immediate sense of calm and introspection. This melody is layered over a bed of ambient synthesizer pads, which add a feeling of spaciousness and a touch of beautiful melancholy.",
     releaseDate: new Date('2024-12-01'),
     tags: ['atmospheric', 'minimal', 'focus', 'ambient', 'transcend'],
@@ -51,7 +49,8 @@ export const EPISODES: Episode[] = [
     title: "[in]anoce",
     artist: "[in]anoce",
     url: "https://archive.org/download/music-for-programming-ep73-inanoce/Episode73-Inanoce.mp3",
-    duration: 4980, // 1:23:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4980, 
     description: "[in]anoce presents a refined exploration of minimal electronic compositions that blur the boundaries between organic and synthetic sounds. Perfect for analytical thinking and complex algorithm development sessions.",
     releaseDate: new Date('2024-11-15'),
     tags: ['minimal', 'electronic', 'programming', 'organic', 'synthetic'],
@@ -73,7 +72,8 @@ export const EPISODES: Episode[] = [
     title: "Freddy Cyclone",
     artist: "Freddy Cyclone",
     url: "https://archive.org/download/music-for-programming-ep72-freddycyclone/Episode72-FreddyCyclone.mp3",
-    duration: 5220, // 1:27:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5220, 
     description: "Freddy Cyclone creates swirling, dynamic ambient textures that rotate and evolve like weather systems. This episode provides energizing yet calming soundscapes perfect for intensive programming work and creative problem-solving.",
     releaseDate: new Date('2024-11-01'),
     tags: ['ambient', 'cyclonic', 'focus', 'dynamic', 'weather-inspired'],
@@ -95,7 +95,8 @@ export const EPISODES: Episode[] = [
     title: "Neon Genesis",
     artist: "Neon Genesis",
     url: "https://archive.org/download/music-for-programming-ep71-neongenesis/Episode71-NeonGenesis.mp3",
-    duration: 5040, // 1:24:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5040, 
     description: "Neon Genesis delivers futuristic programming soundscapes with cyberpunk aesthetics. This episode creates a digital realm perfect for late-night coding sessions and creative development work with synthesized textures.",
     releaseDate: new Date('2024-10-15'),
     tags: ['futuristic', 'neon', 'programming', 'cyberpunk', 'digital'],
@@ -117,7 +118,8 @@ export const EPISODES: Episode[] = [
     title: "THINGS DISAPPEAR",
     artist: "THINGS DISAPPEAR",
     url: "https://archive.org/download/music-for-programming-ep70-thingsdisappear/Episode70-ThingsDisappear.mp3",
-    duration: 4920, // 1:22:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4920, 
     description: "THINGS DISAPPEAR presents an ethereal journey through disappearing soundscapes where musical elements fade in and out of existence. Creates a meditative atmosphere for deep contemplation and focused coding sessions.",
     releaseDate: new Date('2024-10-01'),
     tags: ['ethereal', 'disappearing', 'ambient', 'meditative', 'contemplative'],
@@ -139,7 +141,8 @@ export const EPISODES: Episode[] = [
     title: "Pearl River Sound",
     artist: "Pearl River Sound",
     url: "https://archive.org/download/music-for-programming-ep69-pearlriversound/Episode69-PearlRiverSound.mp3",
-    duration: 5160, // 1:26:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5160, 
     description: "Pearl River Sound presents flowing river-inspired ambient sounds with gentle electronic textures. This episode captures the continuous movement of water, creating steady rhythms perfect for programming workflows and concentration.",
     releaseDate: new Date('2024-09-15'),
     tags: ['river', 'flowing', 'ambient', 'natural', 'water-inspired'],
@@ -161,7 +164,8 @@ export const EPISODES: Episode[] = [
     title: "no data available",
     artist: "no data available",
     url: "https://archive.org/download/music-for-programming-ep68-nodataavailable/Episode68-NoDataAvailable.mp3",
-    duration: 4800, // 1:20:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4800, 
     description: "no data available explores digital void and data absence, creating ambient textures from the spaces between information. This episode transforms null values into productive contemplation space for developers.",
     releaseDate: new Date('2024-09-01'),
     tags: ['void', 'data', 'minimal', 'digital', 'null-space'],
@@ -183,7 +187,8 @@ export const EPISODES: Episode[] = [
     title: "Datassette",
     artist: "Datassette",
     url: "https://archive.org/download/music-for-programming-ep67-datassette/Episode67-Datassette.mp3",
-    duration: 5280, // 1:28:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5280, 
     description: "Datassette delivers classic ambient programming music featuring a diverse selection of artists. This episode combines nostalgic elements with modern ambient textures, creating a unique sonic environment perfect for coding sessions.",
     releaseDate: new Date('2024-08-15'),
     tags: ['classic', 'datassette', 'programming', 'nostalgic', 'ambient'],
@@ -213,7 +218,8 @@ export const EPISODES: Episode[] = [
     title: "Conrad Clipper",
     artist: "Conrad Clipper",
     url: "https://archive.org/download/music-for-programming-ep66-conradclipper/Episode66-ConradClipper.mp3",
-    duration: 4920, // 1:22:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4920, 
     description: "Conrad Clipper delivers precision-crafted electronic soundscapes with crisp digital textures. This episode features meticulously arranged compositions that mirror the clean efficiency of well-written code and systematic problem-solving.",
     releaseDate: new Date('2024-08-01'),
     tags: ['precision', 'digital', 'crisp', 'electronic', 'efficient'],
@@ -235,7 +241,8 @@ export const EPISODES: Episode[] = [
     title: "Matt Whitehead",
     artist: "Matt Whitehead",
     url: "https://archive.org/download/music-for-programming-ep65-mattwhitehead/Episode65-MattWhitehead.mp3",
-    duration: 5040, // 1:24:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5040, 
     description: "Matt Whitehead presents contemplative ambient compositions with subtle melodic progressions. This episode creates a peaceful environment for deep thinking and complex problem-solving sessions, perfect for architectural planning.",
     releaseDate: new Date('2024-07-15'),
     tags: ['contemplative', 'ambient', 'melodic', 'peaceful', 'deep-thinking'],
@@ -257,7 +264,8 @@ export const EPISODES: Episode[] = [
     title: "Strepsil",
     artist: "Strepsil",
     url: "https://archive.org/download/music-for-programming-ep64-strepsil/Episode64-Strepsil.mp3",
-    duration: 4860, // 1:21:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4860, 
     description: "Strepsil offers therapeutic soundscapes designed to soothe the mind during intensive coding sessions. These healing ambient textures provide mental clarity and reduce cognitive fatigue during long development cycles.",
     releaseDate: new Date('2024-07-01'),
     tags: ['therapeutic', 'healing', 'soothing', 'mental-clarity', 'cognitive'],
@@ -279,7 +287,8 @@ export const EPISODES: Episode[] = [
     title: "T-FLX",
     artist: "T-FLX",
     url: "https://archive.org/download/music-for-programming-ep63-tflx/Episode63-TFLX.mp3",
-    duration: 5100, // 1:25:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5100, 
     description: "T-FLX delivers flexible electronic compositions that adapt and flow like responsive code architecture. This episode features dynamic arrangements that encourage creative thinking and adaptive problem-solving approaches.",
     releaseDate: new Date('2024-06-15'),
     tags: ['flexible', 'adaptive', 'dynamic', 'responsive', 'creative'],
@@ -301,7 +310,8 @@ export const EPISODES: Episode[] = [
     title: "Our Grey Lives",
     artist: "Our Grey Lives",
     url: "https://archive.org/download/music-for-programming-ep62-ourgreylives/Episode62-OurGreyLives.mp3",
-    duration: 4980, // 1:23:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4980, 
     description: "Our Grey Lives explores the monochromatic beauty of routine programming life, finding extraordinary depth in ordinary coding moments. This episode celebrates the subtle satisfaction of debugging and systematic problem-solving.",
     releaseDate: new Date('2024-06-01'),
     tags: ['monochromatic', 'routine', 'debugging', 'satisfaction', 'ordinary-extraordinary'],
@@ -323,7 +333,8 @@ export const EPISODES: Episode[] = [
     title: "Linnley",
     artist: "Linnley",
     url: "https://archive.org/download/music-for-programming-ep61-linnley/Episode61-Linnley.mp3",
-    duration: 5220, // 1:27:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5220, 
     description: "Linnley presents linear ambient progressions with mathematical precision. This episode creates structured soundscapes that mirror algorithmic thinking and sequential problem-solving methodologies perfect for systematic development work.",
     releaseDate: new Date('2024-05-15'),
     tags: ['linear', 'mathematical', 'structured', 'algorithmic', 'sequential'],
@@ -345,7 +356,8 @@ export const EPISODES: Episode[] = [
     title: "TUNDRA",
     artist: "TUNDRA",
     url: "https://archive.org/download/music-for-programming-ep60-tundra/Episode60-TUNDRA.mp3",
-    duration: 4800, // 1:20:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4800, 
     description: "TUNDRA delivers vast, expansive soundscapes reminiscent of arctic landscapes. This episode creates an environment of infinite possibility and sparse beauty, perfect for exploring new technologies and innovative solutions.",
     releaseDate: new Date('2024-05-01'),
     tags: ['vast', 'expansive', 'arctic', 'sparse', 'innovative'],
@@ -367,7 +379,8 @@ export const EPISODES: Episode[] = [
     title: "Munau",
     artist: "Munau",
     url: "https://archive.org/download/music-for-programming-ep59-munau/Episode59-Munau.mp3",
-    duration: 5040, // 1:24:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5040, 
     description: "Munau creates mysterious and atmospheric compositions with hidden depths. This episode features enigmatic soundscapes that encourage exploration and discovery, perfect for diving deep into complex codebases and architectural challenges.",
     releaseDate: new Date('2024-04-15'),
     tags: ['mysterious', 'atmospheric', 'enigmatic', 'exploration', 'discovery'],
@@ -389,7 +402,8 @@ export const EPISODES: Episode[] = [
     title: "O1Sun",
     artist: "O1Sun",
     url: "https://archive.org/download/music-for-programming-ep58-o1sun/Episode58-O1Sun.mp3",
-    duration: 4920, // 1:22:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4920, 
     description: "O1Sun delivers solar-powered ambient compositions with warm, energizing textures. This episode creates a bright atmosphere that enhances creativity and motivation during development sessions, perfect for breakthrough moments.",
     releaseDate: new Date('2024-04-01'),
     tags: ['solar', 'warm', 'energizing', 'bright', 'creative'],
@@ -411,7 +425,8 @@ export const EPISODES: Episode[] = [
     title: "Hainbach",
     artist: "Hainbach",
     url: "https://archive.org/download/music-for-programming-ep57-hainbach/Episode57-Hainbach.mp3",
-    duration: 5160, // 1:26:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5160, 
     description: "Hainbach presents experimental ambient compositions using vintage electronic equipment. This episode bridges retro computing aesthetics with modern programming needs, creating nostalgic yet forward-thinking soundscapes.",
     releaseDate: new Date('2024-03-15'),
     tags: ['experimental', 'vintage', 'retro-computing', 'nostalgic', 'forward-thinking'],
@@ -433,7 +448,8 @@ export const EPISODES: Episode[] = [
     title: "Forest Drive West",
     artist: "Forest Drive West",
     url: "https://archive.org/download/music-for-programming-ep56-forestdrivewest/Episode56-ForestDriveWest.mp3",
-    duration: 4980, // 1:23:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4980, 
     description: "Forest Drive West creates organic ambient soundscapes inspired by natural environments. This episode brings the tranquility of forest paths into coding sessions, promoting calm focus and sustainable development practices.",
     releaseDate: new Date('2024-03-01'),
     tags: ['organic', 'natural', 'forest', 'tranquil', 'sustainable'],
@@ -455,7 +471,8 @@ export const EPISODES: Episode[] = [
     title: "20 Jazz Funk Greats",
     artist: "20 Jazz Funk Greats",
     url: "https://archive.org/download/music-for-programming-ep55-20jazzfunkgreats/Episode55-20JazzFunkGreats.mp3",
-    duration: 5100, // 1:25:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5100, 
     description: "20 Jazz Funk Greats delivers groove-oriented ambient compositions with rhythmic complexity. This episode adds subtle funk elements to programming sessions, encouraging creative coding and innovative problem-solving approaches.",
     releaseDate: new Date('2024-02-15'),
     tags: ['groove', 'rhythmic', 'funk', 'creative', 'innovative'],
@@ -477,7 +494,8 @@ export const EPISODES: Episode[] = [
     title: "HLER",
     artist: "HLER",
     url: "https://archive.org/download/music-for-programming-ep54-hler/Episode54-HLER.mp3",
-    duration: 4860, // 1:21:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4860, 
     description: "HLER presents high-level ambient compositions with abstract electronic textures. This episode creates sophisticated soundscapes that mirror high-level programming concepts and architectural thinking patterns.",
     releaseDate: new Date('2024-02-01'),
     tags: ['high-level', 'abstract', 'sophisticated', 'architectural', 'conceptual'],
@@ -499,7 +517,8 @@ export const EPISODES: Episode[] = [
     title: "Beb Welten",
     artist: "Beb Welten",
     url: "https://archive.org/download/music-for-programming-ep53-bebwelten/Episode53-BebWelten.mp3",
-    duration: 5040, // 1:24:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5040, 
     description: "Beb Welten creates worldly ambient compositions drawing from diverse cultural influences. This episode brings global perspectives to coding sessions, encouraging inclusive development practices and multicultural thinking.",
     releaseDate: new Date('2024-01-15'),
     tags: ['worldly', 'cultural', 'diverse', 'inclusive', 'multicultural'],
@@ -521,7 +540,8 @@ export const EPISODES: Episode[] = [
     title: "Inchindown",
     artist: "Inchindown",
     url: "https://archive.org/download/music-for-programming-ep52-inchindown/Episode52-Inchindown.mp3",
-    duration: 4920, // 1:22:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4920, 
     description: "Inchindown delivers deep, resonant ambient compositions with extended reverb and spatial depth. This episode creates immersive acoustic environments that enhance concentration and promote deep thinking about complex systems.",
     releaseDate: new Date('2024-01-01'),
     tags: ['deep', 'resonant', 'spatial', 'immersive', 'complex-systems'],
@@ -543,7 +563,8 @@ export const EPISODES: Episode[] = [
     title: "Mucha",
     artist: "Mucha",
     url: "https://archive.org/download/music-for-programming-ep51-mucha/Episode51-Mucha.mp3",
-    duration: 5160, // 1:26:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5160, 
     description: "Mucha presents art nouveau-inspired ambient compositions with elegant, flowing structures. This episode creates aesthetically pleasing soundscapes that encourage beautiful code design and elegant solution architecture.",
     releaseDate: new Date('2023-12-15'),
     tags: ['art-nouveau', 'elegant', 'flowing', 'aesthetic', 'beautiful-code'],
@@ -565,7 +586,8 @@ export const EPISODES: Episode[] = [
     title: "Misc.",
     artist: "Misc.",
     url: "https://archive.org/download/music-for-programming-ep50-misc/Episode50-Misc.mp3",
-    duration: 4980, // 1:23:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4980, 
     description: "Misc. delivers miscellaneous ambient compositions from various sources and styles. This milestone 50th episode celebrates diversity in programming music with eclectic soundscapes for versatile development sessions.",
     releaseDate: new Date('2023-12-01'),
     tags: ['miscellaneous', 'diverse', 'milestone', 'eclectic', 'versatile'],
@@ -587,7 +609,8 @@ export const EPISODES: Episode[] = [
     title: "Julien Mier",
     artist: "Julien Mier",
     url: "https://archive.org/download/music-for-programming-ep49-julienmier/Episode49-JulienMier.mp3",
-    duration: 5100, // 1:25:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5100, 
     description: "Julien Mier creates sophisticated ambient compositions with French electronic influences. This episode brings European elegance to coding sessions with refined soundscapes perfect for architectural planning and design work.",
     releaseDate: new Date('2023-11-15'),
     tags: ['sophisticated', 'french', 'elegant', 'refined', 'architectural'],
@@ -609,7 +632,8 @@ export const EPISODES: Episode[] = [
     title: "Michael Hicks",
     artist: "Michael Hicks",
     url: "https://archive.org/download/music-for-programming-ep48-michaelhicks/Episode48-MichaelHicks.mp3",
-    duration: 4860, // 1:21:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4860, 
     description: "Michael Hicks delivers contemporary ambient compositions with modern production techniques. This episode features cutting-edge soundscapes that reflect current programming methodologies and agile development practices.",
     releaseDate: new Date('2023-11-01'),
     tags: ['contemporary', 'modern', 'cutting-edge', 'agile', 'methodologies'],
@@ -631,7 +655,8 @@ export const EPISODES: Episode[] = [
     title: "Abe Mangger",
     artist: "Abe Mangger",
     url: "https://archive.org/download/music-for-programming-ep47-abemangger/Episode47-AbeMangger.mp3",
-    duration: 5220, // 1:27:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5220, 
     description: "Abe Mangger creates experimental ambient compositions with unconventional structures. This episode encourages creative problem-solving and innovative thinking through unique soundscapes that challenge traditional programming approaches.",
     releaseDate: new Date('2023-10-15'),
     tags: ['experimental', 'unconventional', 'creative', 'innovative', 'challenging'],
@@ -653,7 +678,8 @@ export const EPISODES: Episode[] = [
     title: "Jo Johnson",
     artist: "Jo Johnson",
     url: "https://archive.org/download/music-for-programming-ep46-jojohnson/Episode46-JoJohnson.mp3",
-    duration: 4920, // 1:22:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4920, 
     description: "Jo Johnson presents minimalist ambient compositions with subtle variations and gentle progressions. This episode creates calm, focused environments perfect for detailed coding work and careful debugging sessions.",
     releaseDate: new Date('2023-10-01'),
     tags: ['minimalist', 'subtle', 'gentle', 'calm', 'detailed'],
@@ -675,7 +701,8 @@ export const EPISODES: Episode[] = [
     title: "Ehohroma",
     artist: "Ehohroma",
     url: "https://archive.org/download/music-for-programming-ep45-ehohroma/Episode45-Ehohroma.mp3",
-    duration: 5040, // 1:24:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5040, 
     description: "Ehohroma delivers chromatic ambient compositions exploring color-based sonic textures. This episode uses spectrum-inspired soundscapes to enhance visual coding environments and design-oriented programming tasks.",
     releaseDate: new Date('2023-09-15'),
     tags: ['chromatic', 'color-based', 'spectrum', 'visual', 'design-oriented'],
@@ -697,7 +724,8 @@ export const EPISODES: Episode[] = [
     title: "hubka",
     artist: "hubka",
     url: "https://archive.org/download/music-for-programming-ep44-hubka/Episode44-hubka.mp3",
-    duration: 4980, // 1:23:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4980, 
     description: "hubka creates hub-centered ambient compositions focusing on connectivity and network patterns. This episode emphasizes distributed systems thinking and collaborative development through interconnected soundscapes.",
     releaseDate: new Date('2023-09-01'),
     tags: ['hub-centered', 'connectivity', 'network', 'distributed', 'collaborative'],
@@ -719,7 +747,8 @@ export const EPISODES: Episode[] = [
     title: "Casino Versus Japan",
     artist: "Casino Versus Japan",
     url: "https://archive.org/download/music-for-programming-ep43-casinoversusjapan/Episode43-CasinoVersusJapan.mp3",
-    duration: 5160, // 1:26:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5160, 
     description: "Casino Versus Japan delivers glitchy ambient compositions with Japanese electronic influences. This episode blends Eastern minimalism with Western electronic techniques, perfect for cross-cultural development projects.",
     releaseDate: new Date('2023-08-15'),
     tags: ['glitchy', 'japanese', 'minimalism', 'cross-cultural', 'electronic'],
@@ -741,7 +770,8 @@ export const EPISODES: Episode[] = [
     title: "Ben Frost",
     artist: "Ben Frost",
     url: "https://archive.org/download/music-for-programming-ep42-benfrost/Episode42-BenFrost.mp3",
-    duration: 4800, // 1:20:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4800, 
     description: "Ben Frost creates intense ambient compositions with crystalline textures and precise sound design. This episode provides sharp focus for complex algorithmic work and system optimization tasks.",
     releaseDate: new Date('2023-08-01'),
     tags: ['intense', 'crystalline', 'precise', 'sharp-focus', 'optimization'],
@@ -763,7 +793,8 @@ export const EPISODES: Episode[] = [
     title: "Slowdive",
     artist: "Slowdive",
     url: "https://archive.org/download/music-for-programming-ep41-slowdive/Episode41-Slowdive.mp3",
-    duration: 5100, // 1:25:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5100, 
     description: "Slowdive delivers dreamy ambient compositions with shoegaze influences and ethereal textures. This episode creates immersive environments perfect for contemplative coding and creative development sessions.",
     releaseDate: new Date('2023-07-15'),
     tags: ['dreamy', 'shoegaze', 'ethereal', 'immersive', 'contemplative'],
@@ -785,7 +816,8 @@ export const EPISODES: Episode[] = [
     title: "Popup",
     artist: "Popup",
     url: "https://archive.org/download/music-for-programming-ep40-popup/Episode40-Popup.mp3",
-    duration: 4860, // 1:21:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4860, 
     description: "Popup creates sudden ambient compositions with unexpected elements and dynamic changes. This episode encourages adaptive thinking and quick problem-solving through surprise musical elements and creative transitions.",
     releaseDate: new Date('2023-07-01'),
     tags: ['sudden', 'unexpected', 'dynamic', 'adaptive', 'quick-thinking'],
@@ -807,7 +839,8 @@ export const EPISODES: Episode[] = [
     title: "Stumbleine",
     artist: "Stumbleine",
     url: "https://archive.org/download/music-for-programming-ep39-stumbleine/Episode39-Stumbleine.mp3",
-    duration: 5220, // 1:27:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5220, 
     description: "Stumbleine delivers intricate ambient compositions with complex layering and subtle progressions. This episode supports detailed work and careful analysis through sophisticated soundscapes perfect for architectural planning.",
     releaseDate: new Date('2023-06-15'),
     tags: ['intricate', 'complex', 'layered', 'sophisticated', 'architectural'],
@@ -829,7 +862,8 @@ export const EPISODES: Episode[] = [
     title: "Four Tet",
     artist: "Four Tet",
     url: "https://archive.org/download/music-for-programming-ep38-fourtet/Episode38-FourTet.mp3",
-    duration: 4920, // 1:22:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4920, 
     description: "Four Tet creates rhythmic ambient compositions with organic electronic textures. This episode balances structure with fluidity, perfect for agile development practices and iterative programming approaches.",
     releaseDate: new Date('2023-06-01'),
     tags: ['rhythmic', 'organic', 'balanced', 'agile', 'iterative'],
@@ -851,7 +885,8 @@ export const EPISODES: Episode[] = [
     title: "Biosphere",
     artist: "Biosphere",
     url: "https://archive.org/download/music-for-programming-ep37-biosphere/Episode37-Biosphere.mp3",
-    duration: 5040, // 1:24:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5040, 
     description: "Biosphere delivers environmental ambient compositions inspired by natural ecosystems. This episode creates sustainable coding environments that promote long-term thinking and ecological programming practices.",
     releaseDate: new Date('2023-05-15'),
     tags: ['environmental', 'ecosystems', 'sustainable', 'ecological', 'long-term'],
@@ -873,7 +908,8 @@ export const EPISODES: Episode[] = [
     title: "Emancipator",
     artist: "Emancipator",
     url: "https://archive.org/download/music-for-programming-ep36-emancipator/Episode36-Emancipator.mp3",
-    duration: 4980, // 1:23:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4980, 
     description: "Emancipator creates liberating ambient compositions that free the mind from constraints. This episode encourages creative freedom and innovative thinking through expansive soundscapes perfect for breakthrough development work.",
     releaseDate: new Date('2023-05-01'),
     tags: ['liberating', 'freedom', 'innovative', 'expansive', 'breakthrough'],
@@ -895,7 +931,8 @@ export const EPISODES: Episode[] = [
     title: "Kerretta",
     artist: "Kerretta",
     url: "https://archive.org/download/music-for-programming-ep35-kerretta/Episode35-Kerretta.mp3",
-    duration: 5160, // 1:26:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5160, 
     description: "Kerretta delivers post-rock influenced ambient compositions with dynamic buildups and emotional depth. This episode supports passionate coding sessions and emotionally engaging development work through powerful soundscapes.",
     releaseDate: new Date('2023-04-15'),
     tags: ['post-rock', 'dynamic', 'emotional', 'passionate', 'powerful'],
@@ -917,7 +954,8 @@ export const EPISODES: Episode[] = [
     title: "Com Truise",
     artist: "Com Truise",
     url: "https://archive.org/download/music-for-programming-ep34-comtruise/Episode34-ComTruise.mp3",
-    duration: 4800, // 1:20:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4800, 
     description: "Com Truise creates retro-futuristic ambient compositions with synthwave influences. This episode brings nostalgic computing aesthetics to modern development work, perfect for retro-inspired projects and vintage system emulation.",
     releaseDate: new Date('2023-04-01'),
     tags: ['retro-futuristic', 'synthwave', 'nostalgic', 'vintage', 'emulation'],
@@ -939,7 +977,8 @@ export const EPISODES: Episode[] = [
     title: "65daysofstatic",
     artist: "65daysofstatic",
     url: "https://archive.org/download/music-for-programming-ep33-65daysofstatic/Episode33-65daysofstatic.mp3",
-    duration: 5100, // 1:25:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5100, 
     description: "65daysofstatic delivers cinematic ambient compositions with mathematical precision and electronic complexity. This episode creates epic soundscapes perfect for large-scale system development and ambitious programming projects.",
     releaseDate: new Date('2023-03-15'),
     tags: ['cinematic', 'mathematical', 'epic', 'large-scale', 'ambitious'],
@@ -961,7 +1000,8 @@ export const EPISODES: Episode[] = [
     title: "No Clear Mind",
     artist: "No Clear Mind",
     url: "https://archive.org/download/music-for-programming-ep32-noclearmind/Episode32-NoClearMind.mp3",
-    duration: 4860, // 1:21:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4860, 
     description: "No Clear Mind creates foggy ambient compositions that embrace uncertainty and ambiguity. This episode helps navigate unclear requirements and ambiguous specifications through meditative soundscapes that clarify thinking.",
     releaseDate: new Date('2023-03-01'),
     tags: ['foggy', 'uncertain', 'ambiguous', 'meditative', 'clarifying'],
@@ -983,7 +1023,8 @@ export const EPISODES: Episode[] = [
     title: "Loess",
     artist: "Loess",
     url: "https://archive.org/download/music-for-programming-ep31-loess/Episode31-Loess.mp3",
-    duration: 5220, // 1:27:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5220, 
     description: "Loess delivers earthy ambient compositions inspired by geological formations and natural processes. This episode creates solid foundations for programming work through grounded soundscapes that promote stable development practices.",
     releaseDate: new Date('2023-02-15'),
     tags: ['earthy', 'geological', 'natural', 'solid', 'stable'],
@@ -1005,7 +1046,8 @@ export const EPISODES: Episode[] = [
     title: "Matt Whitehead",
     artist: "Matt Whitehead",
     url: "https://archive.org/download/music-for-programming-ep30-mattwhitehead/Episode30-MattWhitehead.mp3",
-    duration: 4920, // 1:22:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4920, 
     description: "Matt Whitehead returns with contemplative ambient compositions featuring deeper meditation and enhanced focus techniques. This second episode continues exploring peaceful soundscapes for concentrated programming work.",
     releaseDate: new Date('2023-02-01'),
     tags: ['contemplative', 'meditation', 'enhanced-focus', 'peaceful', 'concentrated'],
@@ -1027,7 +1069,8 @@ export const EPISODES: Episode[] = [
     title: "Drosselmeyer",
     artist: "Drosselmeyer",
     url: "https://archive.org/download/music-for-programming-ep29-drosselmeyer/Episode29-Drosselmeyer.mp3",
-    duration: 5040, // 1:24:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5040, 
     description: "Drosselmeyer creates mechanical ambient compositions inspired by clockwork and precision engineering. This episode encourages systematic thinking and precise implementation through intricate mechanical soundscapes.",
     releaseDate: new Date('2023-01-15'),
     tags: ['mechanical', 'clockwork', 'precision', 'systematic', 'intricate'],
@@ -1049,7 +1092,8 @@ export const EPISODES: Episode[] = [
     title: "Skee Mask",
     artist: "Skee Mask",
     url: "https://archive.org/download/music-for-programming-ep28-skeemask/Episode28-SkeeMask.mp3",
-    duration: 4980, // 1:23:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4980, 
     description: "Skee Mask delivers masked ambient compositions with hidden complexities and layered structures. This episode explores concealed algorithms and encrypted thinking through mysterious soundscapes perfect for security-focused development.",
     releaseDate: new Date('2023-01-01'),
     tags: ['masked', 'hidden', 'encrypted', 'mysterious', 'security-focused'],
@@ -1071,7 +1115,8 @@ export const EPISODES: Episode[] = [
     title: "Arovane",
     artist: "Arovane",
     url: "https://archive.org/download/music-for-programming-ep27-arovane/Episode27-Arovane.mp3",
-    duration: 5160, // 1:26:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5160, 
     description: "Arovane creates glitchy ambient compositions with digital artifacts and electronic textures. This episode embraces imperfection and controlled chaos, perfect for debugging sessions and error handling development work.",
     releaseDate: new Date('2022-12-15'),
     tags: ['glitchy', 'digital-artifacts', 'imperfection', 'controlled-chaos', 'debugging'],
@@ -1093,7 +1138,8 @@ export const EPISODES: Episode[] = [
     title: "Porya Hatami",
     artist: "Porya Hatami",
     url: "https://archive.org/download/music-for-programming-ep26-poryahatami/Episode26-PoryaHatami.mp3",
-    duration: 4800, // 1:20:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4800, 
     description: "Porya Hatami presents Persian-influenced ambient compositions with Middle Eastern textures and scales. This episode brings cultural diversity to coding sessions through exotic soundscapes that inspire global perspective in development.",
     releaseDate: new Date('2022-12-01'),
     tags: ['persian', 'middle-eastern', 'cultural', 'exotic', 'global'],
@@ -1115,7 +1161,8 @@ export const EPISODES: Episode[] = [
     title: "Machinedrum",
     artist: "Machinedrum",
     url: "https://archive.org/download/music-for-programming-ep25-machinedrum/Episode25-Machinedrum.mp3",
-    duration: 5100, // 1:25:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5100, 
     description: "Machinedrum delivers rhythmic ambient compositions with automated percussion and machine-like precision. This episode supports systematic programming and automated workflow development through mechanical rhythms.",
     releaseDate: new Date('2022-11-15'),
     tags: ['rhythmic', 'automated', 'machine-like', 'systematic', 'mechanical'],
@@ -1137,7 +1184,8 @@ export const EPISODES: Episode[] = [
     title: "Knxwledge",
     artist: "Knxwledge",
     url: "https://archive.org/download/music-for-programming-ep24-knxwledge/Episode24-Knxwledge.mp3",
-    duration: 4860, // 1:21:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4860, 
     description: "Knxwledge creates knowledge-based ambient compositions that celebrate learning and wisdom acquisition. This episode promotes continuous learning and skill development through educational soundscapes perfect for research and study.",
     releaseDate: new Date('2022-11-01'),
     tags: ['knowledge-based', 'learning', 'wisdom', 'educational', 'research'],
@@ -1159,7 +1207,8 @@ export const EPISODES: Episode[] = [
     title: "Beb Welten",
     artist: "Beb Welten",
     url: "https://archive.org/download/music-for-programming-ep23-bebwelten/Episode23-BebWelten.mp3",
-    duration: 5220, // 1:27:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5220, 
     description: "Beb Welten returns with expanded worldly ambient compositions featuring enhanced global perspectives. This second episode deepens international development approaches through diverse cultural soundscapes and inclusive design thinking.",
     releaseDate: new Date('2022-10-15'),
     tags: ['worldly', 'global', 'international', 'diverse', 'inclusive'],
@@ -1181,7 +1230,8 @@ export const EPISODES: Episode[] = [
     title: "YkΩ",
     artist: "YkΩ",
     url: "https://archive.org/download/music-for-programming-ep22-ykomega/Episode22-YkOmega.mp3",
-    duration: 4920, // 1:22:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4920, 
     description: "YkΩ creates omega-level ambient compositions representing the final state of perfect algorithms. This episode explores completion and optimization through mathematical soundscapes that inspire elegant solution design.",
     releaseDate: new Date('2022-10-01'),
     tags: ['omega-level', 'final-state', 'perfect', 'mathematical', 'elegant'],
@@ -1203,7 +1253,8 @@ export const EPISODES: Episode[] = [
     title: "Monolog",
     artist: "Monolog",
     url: "https://archive.org/download/music-for-programming-ep21-monolog/Episode21-Monolog.mp3",
-    duration: 5040, // 1:24:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5040, 
     description: "Monolog delivers single-threaded ambient compositions focusing on individual thought processes. This episode supports solo development work and personal coding reflection through introspective soundscapes.",
     releaseDate: new Date('2022-09-15'),
     tags: ['single-threaded', 'individual', 'solo', 'introspective', 'personal'],
@@ -1225,7 +1276,8 @@ export const EPISODES: Episode[] = [
     title: "Monokai",
     artist: "Monokai",
     url: "https://archive.org/download/music-for-programming-ep20-monokai/Episode20-Monokai.mp3",
-    duration: 4980, // 1:23:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4980, 
     description: "Monokai creates color scheme-inspired ambient compositions based on the popular dark theme. This episode brings visual harmony to coding sessions through soundscapes that complement modern IDE environments and dark mode aesthetics.",
     releaseDate: new Date('2022-09-01'),
     tags: ['color-scheme', 'dark-theme', 'visual-harmony', 'IDE', 'dark-mode'],
@@ -1247,7 +1299,8 @@ export const EPISODES: Episode[] = [
     title: "Kettel",
     artist: "Kettel",
     url: "https://archive.org/download/music-for-programming-ep19-kettel/Episode19-Kettel.mp3",
-    duration: 5160, // 1:26:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5160, 
     description: "Kettel delivers kettled ambient compositions with contained and focused soundscapes. This episode creates enclosed environments perfect for concentrated programming work and isolated development sessions.",
     releaseDate: new Date('2022-08-15'),
     tags: ['kettled', 'contained', 'focused', 'enclosed', 'isolated'],
@@ -1269,7 +1322,8 @@ export const EPISODES: Episode[] = [
     title: "Chris",
     artist: "Chris",
     url: "https://archive.org/download/music-for-programming-ep18-chris/Episode18-Chris.mp3",
-    duration: 4800, // 1:20:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4800, 
     description: "Chris creates personal ambient compositions with human-centered design approaches. This episode brings warmth and personality to coding sessions through relatable soundscapes that emphasize user experience and empathetic development.",
     releaseDate: new Date('2022-08-01'),
     tags: ['personal', 'human-centered', 'warm', 'relatable', 'empathetic'],
@@ -1291,7 +1345,8 @@ export const EPISODES: Episode[] = [
     title: "Ishq",
     artist: "Ishq",
     url: "https://archive.org/download/music-for-programming-ep17-ishq/Episode17-Ishq.mp3",
-    duration: 5100, // 1:25:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5100, 
     description: "Ishq delivers passionate ambient compositions exploring love and dedication in programming. This episode celebrates the deep passion developers have for their craft through emotionally rich soundscapes that inspire devoted coding.",
     releaseDate: new Date('2022-07-15'),
     tags: ['passionate', 'love', 'dedication', 'devoted', 'craft'],
@@ -1313,7 +1368,8 @@ export const EPISODES: Episode[] = [
     title: "Hecq",
     artist: "Hecq",
     url: "https://archive.org/download/music-for-programming-ep16-hecq/Episode16-Hecq.mp3",
-    duration: 4860, // 1:21:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4860, 
     description: "Hecq creates aggressive ambient compositions with industrial textures and harsh digital processing. This episode supports intensive development sessions and complex system architecture through powerful, driving soundscapes.",
     releaseDate: new Date('2022-07-01'),
     tags: ['aggressive', 'industrial', 'harsh', 'intensive', 'powerful'],
@@ -1335,7 +1391,8 @@ export const EPISODES: Episode[] = [
     title: "Zander",
     artist: "Zander",
     url: "https://archive.org/download/music-for-programming-ep15-zander/Episode15-Zander.mp3",
-    duration: 5220, // 1:27:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5220, 
     description: "Zander delivers wandering ambient compositions with exploratory structures and adventurous progressions. This episode encourages experimental programming and innovative solution discovery through curious soundscapes.",
     releaseDate: new Date('2022-06-15'),
     tags: ['wandering', 'exploratory', 'adventurous', 'experimental', 'curious'],
@@ -1357,7 +1414,8 @@ export const EPISODES: Episode[] = [
     title: "Loess",
     artist: "Loess",
     url: "https://archive.org/download/music-for-programming-ep14-loess/Episode14-Loess.mp3",
-    duration: 4920, // 1:22:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4920, 
     description: "Loess returns with deeper geological ambient compositions featuring enhanced earth-based textures. This second episode continues exploring solid programming foundations through even more grounded soundscapes and stable development patterns.",
     releaseDate: new Date('2022-06-01'),
     tags: ['geological', 'earth-based', 'solid', 'grounded', 'stable'],
@@ -1379,7 +1437,8 @@ export const EPISODES: Episode[] = [
     title: "Julien Marchal",
     artist: "Julien Marchal",
     url: "https://archive.org/download/music-for-programming-ep13-julienmarchal/Episode13-JulienMarchal.mp3",
-    duration: 5040, // 1:24:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5040, 
     description: "Julien Marchal creates orchestral ambient compositions with classical influences and sophisticated arrangements. This episode brings concert hall elegance to programming sessions through refined musical architectures.",
     releaseDate: new Date('2022-05-15'),
     tags: ['orchestral', 'classical', 'sophisticated', 'elegant', 'refined'],
@@ -1401,7 +1460,8 @@ export const EPISODES: Episode[] = [
     title: "Eduardo Henriksen",
     artist: "Eduardo Henriksen",
     url: "https://archive.org/download/music-for-programming-ep12-eduardohenriksen/Episode12-EduardoHenriksen.mp3",
-    duration: 4980, // 1:23:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4980, 
     description: "Eduardo Henriksen presents Scandinavian ambient compositions with Nordic minimalism and cold precision. This episode brings Arctic clarity to coding sessions through clean, efficient soundscapes that promote systematic thinking.",
     releaseDate: new Date('2022-05-01'),
     tags: ['scandinavian', 'nordic', 'minimalism', 'cold', 'systematic'],
@@ -1423,7 +1483,8 @@ export const EPISODES: Episode[] = [
     title: "Com Truise",
     artist: "Com Truise",
     url: "https://archive.org/download/music-for-programming-ep11-comtruise/Episode11-ComTruise.mp3",
-    duration: 5160, // 1:26:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5160, 
     description: "Com Truise returns with enhanced retro-futuristic ambient compositions featuring deeper synthwave exploration. This second episode expands vintage computing aesthetics with more complex nostalgic soundscapes for retro-inspired development.",
     releaseDate: new Date('2022-04-15'),
     tags: ['retro-futuristic', 'synthwave', 'vintage', 'nostalgic', 'retro-inspired'],
@@ -1445,7 +1506,8 @@ export const EPISODES: Episode[] = [
     title: "Konx-Om-Pax",
     artist: "Konx-Om-Pax",
     url: "https://archive.org/download/music-for-programming-ep10-konxompax/Episode10-KonxOmPax.mp3",
-    duration: 4800, // 1:20:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4800, 
     description: "Konx-Om-Pax delivers mystical ambient compositions with esoteric programming philosophies. This episode explores hidden knowledge and ancient wisdom in coding through mysterious soundscapes that inspire deep algorithmic thinking.",
     releaseDate: new Date('2022-04-01'),
     tags: ['mystical', 'esoteric', 'hidden-knowledge', 'ancient-wisdom', 'mysterious'],
@@ -1467,7 +1529,8 @@ export const EPISODES: Episode[] = [
     title: "Datassette",
     artist: "Datassette",
     url: "https://archive.org/download/music-for-programming-ep09-datassette/Episode09-Datassette.mp3",
-    duration: 5100, // 1:25:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5100, 
     description: "Datassette returns with another classic ambient programming music collection. This second episode continues the signature blend of nostalgic and modern elements, creating timeless soundscapes for dedicated programming sessions.",
     releaseDate: new Date('2022-03-15'),
     tags: ['classic', 'datassette', 'nostalgic', 'timeless', 'dedicated'],
@@ -1489,7 +1552,8 @@ export const EPISODES: Episode[] = [
     title: "Deru",
     artist: "Deru",
     url: "https://archive.org/download/music-for-programming-ep08-deru/Episode08-Deru.mp3",
-    duration: 4860, // 1:21:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4860, 
     description: "Deru creates cinematic ambient compositions with emotional depth and dramatic progression. This episode supports narrative-driven development and storytelling through code with powerful, evolving soundscapes.",
     releaseDate: new Date('2022-03-01'),
     tags: ['cinematic', 'emotional', 'dramatic', 'narrative-driven', 'storytelling'],
@@ -1511,7 +1575,8 @@ export const EPISODES: Episode[] = [
     title: "Tahlhoff Garten + Untitled",
     artist: "Tahlhoff Garten + Untitled",
     url: "https://archive.org/download/music-for-programming-ep07-tahlhoffgartenuntitled/Episode07-TahlhoffGartenUntitled.mp3",
-    duration: 5220, // 1:27:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5220, 
     description: "Tahlhoff Garten + Untitled delivers collaborative ambient compositions exploring partnership in programming. This episode celebrates team development and pair programming through harmonious soundscapes that promote collaborative thinking.",
     releaseDate: new Date('2022-02-15'),
     tags: ['collaborative', 'partnership', 'team-development', 'pair-programming', 'harmonious'],
@@ -1533,7 +1598,8 @@ export const EPISODES: Episode[] = [
     title: "Lackluster",
     artist: "Lackluster",
     url: "https://archive.org/download/music-for-programming-ep06-lackluster/Episode06-Lackluster.mp3",
-    duration: 4920, // 1:22:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4920, 
     description: "Lackluster creates understated ambient compositions with subtle beauty and modest elegance. This episode promotes humble programming practices and modest design approaches through quietly powerful soundscapes.",
     releaseDate: new Date('2022-02-01'),
     tags: ['understated', 'subtle', 'modest', 'humble', 'quietly-powerful'],
@@ -1555,7 +1621,8 @@ export const EPISODES: Episode[] = [
     title: "Julien Neto",
     artist: "Julien Neto",
     url: "https://archive.org/download/music-for-programming-ep05-julienneto/Episode05-JulienNeto.mp3",
-    duration: 5040, // 1:24:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5040, 
     description: "Julien Neto presents Latin-influenced ambient compositions with Brazilian electronic textures. This episode brings South American warmth to coding sessions through tropical soundscapes that inspire creative and passionate development.",
     releaseDate: new Date('2022-01-15'),
     tags: ['latin-influenced', 'brazilian', 'tropical', 'warm', 'passionate'],
@@ -1577,7 +1644,8 @@ export const EPISODES: Episode[] = [
     title: "raison d'être",
     artist: "raison d'être",
     url: "https://archive.org/download/music-for-programming-ep04-raisondetre/Episode04-RaisonDetre.mp3",
-    duration: 4980, // 1:23:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4980, 
     description: "raison d'être creates philosophical ambient compositions exploring the reason for existence in programming. This episode contemplates the deeper meaning of code through existential soundscapes that inspire purposeful development.",
     releaseDate: new Date('2022-01-01'),
     tags: ['philosophical', 'existential', 'purposeful', 'meaningful', 'contemplative'],
@@ -1599,7 +1667,8 @@ export const EPISODES: Episode[] = [
     title: "Kohlberg",
     artist: "Kohlberg",
     url: "https://archive.org/download/music-for-programming-ep03-kohlberg/Episode03-Kohlberg.mp3",
-    duration: 5160, // 1:26:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5160, 
     description: "Kohlberg delivers moral ambient compositions exploring ethical programming and responsible development. This episode examines the moral implications of code through conscientious soundscapes that promote ethical thinking in technology.",
     releaseDate: new Date('2021-12-15'),
     tags: ['moral', 'ethical', 'responsible', 'conscientious', 'technology-ethics'],
@@ -1621,7 +1690,8 @@ export const EPISODES: Episode[] = [
     title: "Chez Viking",
     artist: "Chez Viking",
     url: "https://archive.org/download/music-for-programming-ep02-chezviking/Episode02-ChezViking.mp3",
-    duration: 4800, // 1:20:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 4800, 
     description: "Chez Viking creates Nordic warrior ambient compositions with fierce determination and bold conquest themes. This episode inspires brave programming adventures and fearless debugging through powerful Viking-inspired soundscapes.",
     releaseDate: new Date('2021-12-01'),
     tags: ['nordic', 'warrior', 'fierce', 'brave', 'fearless'],
@@ -1643,7 +1713,8 @@ export const EPISODES: Episode[] = [
     title: "Konx-Om-Pax",
     artist: "Konx-Om-Pax",
     url: "https://archive.org/download/music-for-programming-ep01-konxompax/Episode01-KonxOmPax.mp3",
-    duration: 5100, // 1:25:00
+    sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
+    duration: 5100, 
     description: "Konx-Om-Pax delivers the very first episode of musicforprogramming with mystical ambient compositions. This inaugural episode established the series' signature blend of esoteric programming philosophy and ancient coding wisdom through pioneering soundscapes.",
     releaseDate: new Date('2021-11-15'),
     tags: ['mystical', 'inaugural', 'pioneering', 'esoteric', 'ancient-wisdom'],
@@ -1663,7 +1734,6 @@ export const EPISODES: Episode[] = [
 
 export const episodes = EPISODES;
 
-// Utility functions
 export function getEpisodeByNumber(number: number): Episode | undefined {
   return EPISODES.find(ep => ep.number === number);
 }

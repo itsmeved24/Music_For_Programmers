@@ -25,7 +25,7 @@ export const COLORS = {
 };
 
 export const KEYBINDINGS = {
-  PLAY_PAUSE: ' ', // Spacebar
+  PLAY_PAUSE: ' ', 
   VOLUME_UP: 'ArrowUp',
   VOLUME_DOWN: 'ArrowDown',
   NEXT_EPISODE: 'ArrowRight',

@@ -12,21 +12,21 @@ export interface Episode {
   artist: string;
   duration: number;
   fileSize: string;
-  url: string;
+  url: string; 
   tracks: Track[];
   description?: string;
   releaseDate: Date;
   tags: string[];
+  sourcePage?: string; 
 }
 
 export interface PlaybackState {
   isPlaying: boolean;
   currentTime: number;
   duration: number;
-  volume: number;
-  currentEpisode: Episode | null;
-  isLoading: boolean;
-}
+  volume?: number;
+  error?: string;
+};
 
 export interface VisualizerData {
   frequencyData: Uint8Array;

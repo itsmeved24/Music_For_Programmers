@@ -47,7 +47,7 @@ export class EnhancedAudioManager {
   async loadEpisode(episode: Episode) {
     if (!browser || !this.audio) return;
     
-    // Stop current playback
+
     this.audio.pause();
     this.isReady = false;
     
@@ -87,12 +87,12 @@ export class EnhancedAudioManager {
     }
     
     try {
-      // Initialize Web Audio API on first play
+
       if (!this.audioContext) {
         await this.initWebAudio();
       }
       
-      // Resume audio context if suspended
+
       if (this.audioContext?.state === 'suspended') {
         await this.audioContext.resume();
       }

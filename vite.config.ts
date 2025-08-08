@@ -19,14 +19,14 @@ export default defineConfig({
 					});
 					proxy.on('proxyRes', (proxyRes, req, _res) => {
 						console.log('Received Response from the Target:', proxyRes.statusCode, req.url);
-						// Rewrite 302 redirects to stay within the proxy
+
 						if (proxyRes.statusCode && proxyRes.statusCode >= 300 && proxyRes.statusCode < 400) {
 							const location = proxyRes.headers['location'] as string | undefined;
 							if (location) {
 								try {
 									const url = new URL(location);
 									if (url.hostname.endsWith('archive.org')) {
-										// Force redirect back through our proxy
+
 										proxyRes.headers['location'] = `/archive-proxy${url.pathname}`;
 										console.log('Rewriting redirect Location to:', proxyRes.headers['location']);
 									}
@@ -51,18 +51,9 @@ export default defineConfig({
 						provider: 'playwright',
 						instances: [{ browser: 'chromium' }]
 					},
-					include: ['src/**/*.svelte.{test,spec}.{js,ts}'],
-					exclude: ['src/lib/server/**'],
-					setupFiles: ['./vitest-setup-client.ts']
-				}
-			},
-			{
-				extends: './vite.config.ts',
-				test: {
-					name: 'server',
-					environment: 'node',
-					include: ['src/**/*.{test,spec}.{js,ts}'],
-					exclude: ['src/**/*.svelte.{test,spec}.{js,ts}']
+					include: ['src*.svelte.{test,spec}.{js,ts}'],
+					exclude: ['src/lib/server*.{test,spec}.{js,ts}'],
+					exclude: ['src*.svelte.{test,spec}.{js,ts}']
 				}
 			}
 		]

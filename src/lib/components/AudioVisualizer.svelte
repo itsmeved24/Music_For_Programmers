@@ -9,7 +9,7 @@
   
   const symbols = ['_', '-', '=', '≡', '|', '!', '‖', '│', '┃', '┊', '┋', '╎', '╏'];
   
-  // FIXED: Reactive statement that properly detects play state
+
   $: {
     console.log('🎨 Visualizer state:', { isPlaying, playbackPlaying: $playbackState.isPlaying });
     
@@ -50,9 +50,14 @@
     color: #666;
     margin: 20px 0;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 18px;
+    
+    font-size: clamp(12px, 4.5vw, 18px);
     letter-spacing: 0.05em;
     transition: color 0.3s ease;
+    max-width: 100%;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
   }
   
   .playing {

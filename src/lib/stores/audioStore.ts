@@ -16,7 +16,7 @@ const initialState: PlaybackState = {
   isLoading: false,
   currentTime: 0,
   duration: 0,
-  volume: 0.7, // Default 70% volume
+  volume: 0.7, 
   currentEpisode: null,
   error: null
 };

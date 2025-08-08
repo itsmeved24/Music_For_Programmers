@@ -1,4 +1,4 @@
-/* CSS Variables - IBM Design System Inspired */
+
 html, body {
     margin: 0;
     padding: 0;
@@ -6,7 +6,7 @@ html, body {
     background: #1a1a1a;
     color: #e1e1e1;
     
-    /* Typography Variables */
+    
     --font: 'IBM Plex Mono', 'SF Mono', 'Monaco', 'Menlo', 'Consolas', 'Lucida Console', 'Courier New', monospace;
     --line: 2.5ch;
     font-family: var(--font);
@@ -16,7 +16,7 @@ html, body {
     letter-spacing: 0.01em;
     overflow: hidden;
     
-    /* Color Variables */
+    
     --c-black: #1a1a1a;
     --c-white: #e1e1e1;
     --c-grey: #666666;
@@ -27,7 +27,6 @@ html, body {
     --c-cyan: #9cdcfe;
 }
 
-/* Spacing Utilities */
 .pad {
   padding: var(--line);
 }
@@ -40,7 +39,6 @@ html, body {
   margin-left: 2ch;
 }
 
-/* Layout Classes */
 .hover:hover {
   cursor: pointer;
   opacity: 0.8;
@@ -52,7 +50,6 @@ html, body {
   font-weight: 200;
 }
 
-/* THREE-COLUMN GRID */
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -67,72 +64,73 @@ html, body {
   background: #1a1a1a;
 }
 
-/* COLUMN 1: Terminal - STATIC (No Scroll) */
 .left {
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* NO SCROLLING */
+  overflow: hidden; 
   background: #1a1a1a;
   padding: var(--line);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-/* COLUMN 2: Episode Details - SCROLLABLE */
 .middle {
   background: #1a1a1a;
-  overflow-y: auto; /* ENABLE SCROLLING */
+  overflow-y: auto; 
   overflow-x: hidden;
-  height: 100vh; /* Full viewport height */
+  height: 100vh; 
   
-  /* Hide scrollbar but keep functionality */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE */
+  
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
 }
 
 .middle::-webkit-scrollbar {
-  display: none; /* Chrome, Safari */
+  display: none; 
 }
 
 .middle-content {
   padding: var(--line);
-  min-height: calc(100vh + 200px); /* Ensure enough content to scroll */
+  min-height: calc(100vh + 200px); 
 }
 
-/* COLUMN 3: Episode List - SCROLLABLE */  
+  
 .right {
   background: #1a1a1a;
-  overflow-y: auto; /* ENABLE SCROLLING */
+  overflow-y: auto; 
   overflow-x: hidden;
-  height: 100vh; /* Full viewport height */
+  height: 100vh; 
   
-  /* Hide scrollbar but keep functionality */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE */
+  
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
 }
 
 .right::-webkit-scrollbar {
-  display: none; /* Chrome, Safari */
+  display: none; 
 }
 
 .right-content {
   padding: var(--line);
-  min-height: calc(100vh + 200px); /* Ensure enough content to scroll */
+  min-height: calc(100vh + 200px); 
 }
 
 .code-block {
   font-family: var(--font);
 }
 
-/* Syntax highlighting colors - VIBRANT SCHEME */
 .keyword {
-  color: #61AFEF; /* Light blue/cyan for 'function' and 'return' */
+  color: #61AFEF; 
 }
 
 .function-name {
-  color: #98C379; /* Green for function name */
+  color: #98C379; 
 }
 
 .param {
-  color: #E06C75; /* Orange/pink for parameter */
+  color: #E06C75; 
 }
 
 .operator {
@@ -140,7 +138,7 @@ html, body {
 }
 
 .string {
-  color: #E5C07B; /* Yellow for string literals */
+  color: #E5C07B; 
 }
 
 .brace {
@@ -149,11 +147,11 @@ html, body {
 
 .separator {
   color: var(--c-grey);
-  margin: 30px 0; /* Increased spacing above and below */
-  padding: 15px 0; /* Additional padding for better visual separation */
+  margin: 30px 0; 
+  padding: 15px 0; 
   font-family: var(--font);
-  position: relative; /* For potential visualizer effects */
-  transition: color 0.2s ease; /* Smooth color transitions for audio visualization */
+  position: relative; 
+  transition: color 0.2s ease; 
 }
 
 .current-episode {
@@ -161,7 +159,7 @@ html, body {
 }
 
 .control-link {
-  color: #1BEB9E; /* Original bright green */
+  color: #1BEB9E; 
   margin-right: 1ch;
 }
 
@@ -170,7 +168,7 @@ html, body {
 }
 
 .volume-control, .random-link {
-  color: var(--c-cyan); /* Original cyan */
+  color: var(--c-cyan); 
 }
 
 .links-row {
@@ -178,22 +176,22 @@ html, body {
 }
 
 .link-blue {
-  color: var(--c-blue); /* Original blue */
+  color: var(--c-blue); 
   margin-right: 1ch;
 }
 
 .link-orange {
-  color: var(--c-orange); /* Original orange */
+  color: var(--c-orange); 
   margin-right: 1ch;
 }
 
 .link-purple {
-  color: var(--c-purple); /* Original purple */
+  color: var(--c-purple); 
   margin-right: 1ch;
 }
 
 .stat-line {
-  color: var(--c-green); /* Original green */
+  color: var(--c-green); 
   margin: 0.5ch 0;
 }
 
@@ -205,12 +203,17 @@ html, body {
 }
 
 .meta-line {
-  color: #1BEB9E; /* Original bright green */
+  color: #1BEB9E; 
   margin: 1ch 0;
 }
 
 .play-link, .source-link, .fav-link {
-  color: #1BEB9E; /* Original bright green */
+  color: #1BEB9E; 
+  text-decoration: none;
+}
+
+.source-link:hover, .source-link:focus {
+  text-decoration: none;
 }
 
 .track {
@@ -233,10 +236,18 @@ html, body {
     position: relative;
     display: inline-block;
     width: fit-content;
+    outline: none;
   }
 
   .episode-item:hover {
     color: var(--c-white);
+  }
+
+  .episode-item:focus,
+  .episode-item:focus-visible,
+  .episode-item:active {
+    outline: none;
+    box-shadow: none;
   }
   
   .episode-item.current {
@@ -244,7 +255,11 @@ html, body {
     font-weight: 400;
   }
 
-  /* Add to your main.css */
+  .episode-item.favourited {
+    color: #DDDD25 !important;
+  }
+
+  
 .current-episode {
     transition: opacity 0.3s ease;
   }
@@ -263,21 +278,7 @@ html, body {
   }
   
   
-  /* Rectangle stays visible for current episode */
-  .episode-item.current::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 100%;
-    height: 2.5ch;
-    background: rgba(0, 255, 0, 0.15);
-    border-radius: 4px;
-    z-index: -1;
-  }
 
-/* Audio visualizer styles */
 .audio-visualizer {
   color: var(--c-grey);
   margin: 20px 0;
@@ -294,7 +295,7 @@ html, body {
 }
 
 .audio-visualizer.playing {
-  color: var(--c-green); /* Original green when playing */
+  color: var(--c-green); 
 }
 
 .visualizer-char {
@@ -304,12 +305,11 @@ html, body {
 }
 
 .visualizer-char.active {
-  color: var(--c-green); /* Original green */
-  text-shadow: 0 0 3px var(--c-green); /* Green glow effect */
+  color: var(--c-green); 
+  text-shadow: 0 0 3px var(--c-green); 
   transform: scaleY(1.1);
 }
 
-/* Smooth transitions for episode content changes */
 .episode-meta {
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
@@ -318,7 +318,6 @@ html, body {
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
-/* Smooth fade transition states */
 .episode-content-fade-out {
   opacity: 0;
   transform: translateY(-10px);
@@ -329,29 +328,36 @@ html, body {
   transform: translateY(0);
 }
 
-/* RESPONSIVE */
-@media (max-width: 900px) {
-  .grid {
-    grid-template-columns: 1fr 1fr;
-  }
+@media (max-width: 1024px) {
   
-  .left {
-    display: none;
-  }
+  html, body { overflow: auto; }
+
+  
+  .grid { display: block; height: auto; width: 100%; overflow: visible; }
+  .grid > * { min-height: auto; }
+
+  .left, .middle, .right { height: auto; overflow: visible; padding: calc(var(--line) * 0.75); }
+  .middle-content, .right-content { padding: calc(var(--line) * 0.75); min-height: auto; }
+
+  
+  body { font-size: 16px; }
+  .large { font-size: 36px; line-height: 1.2; }
+
+  
+  .episode-item { width: 100%; }
+  .audio-visualizer { width: 100%; }
 }
 
-@media (min-width: 1024px) {
-  body {
-    font-size: 1.11111111vw;
+@media (min-width: 1280px) {
+  body { font-size: 1.11111111vw; }
+  .large { font-size: 4vw; line-height: 1.11111111em; }
   }
-  
-  .large {
-    font-size: 4vw;
-    line-height: 1.11111111em;
-  }
+
+@media (max-width: 640px) {
+  body { font-size: 15px; }
+  .large { font-size: 28px; }
 }
 
-/* Force preserve vibrant colors after GSAP animation */
 .keyword { color: #61AFEF !important; }
 .function-name { color: #98C379 !important; }
 .param { color: #E06C75 !important; }
@@ -371,3 +377,24 @@ html, body {
 .episode-title { color: var(--c-white) !important; }
 .track { color: var(--c-white) !important; }
 .time-line { color: var(--c-white) !important; }
+
+@media (min-width: 1024px) {
+  .right-content {
+    padding-left: calc(var(--line) * 4);
+  }
+}
+
+.right {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.episode-item,
+.episode-item:focus,
+.episode-item:focus-visible,
+.episode-item:active {
+  outline: 0 !important;
+  box-shadow: none !important;
+}

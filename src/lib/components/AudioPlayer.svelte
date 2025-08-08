@@ -14,7 +14,7 @@ import { uiToGain, gainToUi } from '../utils/volume';
 
   export function loadEpisode(e: Episode) {
     episode = e;
-    // If we're currently playing, keep playing on the new episode
+
     shouldAutoplay = $playbackState.isPlaying === true;
     audioActions.loadEpisode(e);
     if (audioElement && e.url) {
@@ -38,7 +38,6 @@ import { uiToGain, gainToUi } from '../utils/volume';
     }
   }
 
-  // Called by page for progress clicks and skip
   export function seekTo(time: number) {
     console.log('[AudioPlayer.seekTo] requested:', time, 'audio?', !!audioElement, 'store dur:', $playbackState.duration);
     if (!audioElement || isNaN(time)) return;
@@ -48,14 +47,13 @@ import { uiToGain, gainToUi } from '../utils/volume';
     const bounded = Math.max(0, Math.min(duration || time, time));
     try {
       audioElement.currentTime = bounded;
-      audioActions.updateTime(bounded); // keep UI in sync immediately
+      audioActions.updateTime(bounded); 
       console.log('[AudioPlayer.seekTo] applied:', bounded, 'actual currentTime:', audioElement.currentTime);
     } catch (e) {
       console.error('[AudioPlayer.seekTo] error:', e);
     }
   }
 
-  // Audio events
   function handleLoadStart() {
     audioActions.setLoading(true);
   }
@@ -63,7 +61,7 @@ import { uiToGain, gainToUi } from '../utils/volume';
   function handleCanPlay() {
     audioActions.setLoading(false);
     dispatch('audioReady', audioElement);
-    // Auto-play if we were playing before episode switch
+
     if (shouldAutoplay || $playbackState.isPlaying) {
       shouldAutoplay = false;
       audioElement.play().catch(err => {
@@ -124,7 +122,6 @@ import { uiToGain, gainToUi } from '../utils/volume';
     };
   }
 
-  // Reactive sync for volume changes from store
   $: if (isInitialized && audioElement) {
     const storageVolume = $playbackState.volume ?? 0.7;
     const targetGain = uiToGain(storageVolume);
