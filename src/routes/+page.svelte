@@ -18,6 +18,7 @@
   let marqueeItem: HTMLSpanElement | null = null;
   let visualizerWrap: HTMLDivElement | null = null;
   let appRoot: HTMLElement | null = null;
+  let progressFill: HTMLDivElement | null = null;
 
   // Stats
   const totalEpisodes = episodes.length;
@@ -36,21 +37,35 @@
   }
   function refreshFullscreenState() {
     if (typeof document === 'undefined') return;
-    isFullscreen = sf?.isEnabled ? !!sf.isFullscreen : !!getFullscreenElement();
+    isFullscreen = !!(sf?.isEnabled ? sf.isFullscreen : getFullscreenElement());
   }
   async function enterFullscreen() {
     try {
-      if (sf?.isEnabled) {
-        await sf.request(appRoot ?? document.documentElement);
-      } else {
-        const root: any = (appRoot as any) ?? (typeof document !== 'undefined' ? document.documentElement : null);
-        if (root && !getFullscreenElement()) {
-          if (root.requestFullscreen) await root.requestFullscreen();
-          else if (root.webkitRequestFullscreen) await root.webkitRequestFullscreen();
-          else if (root.mozRequestFullScreen) await root.mozRequestFullScreen();
-          else if (root.msRequestFullscreen) await root.msRequestFullscreen();
+      const docEl: any = typeof document !== 'undefined' ? document.documentElement : null;
+      const target: any = (appRoot as any) ?? docEl;
+      if (sf?.isEnabled && target) {
+        await sf.request(target);
+      } else if (target && !getFullscreenElement()) {
+        try {
+          if (target.requestFullscreen) {
+            try {
+              await target.requestFullscreen({ navigationUI: 'hide' } as any);
+            } catch (optErr) {
+              await target.requestFullscreen();
+            }
+          } else if (target.webkitRequestFullscreen) {
+            await target.webkitRequestFullscreen();
+          } else if (target.mozRequestFullScreen) {
+            await target.mozRequestFullScreen();
+          } else if (target.msRequestFullscreen) {
+            await target.msRequestFullscreen();
+          }
+        } catch (err) {
+          console.error('[enterFullscreen] native request failed:', err);
         }
       }
+    } catch (e) {
+      console.error('[enterFullscreen] error:', e);
     } finally {
       refreshFullscreenState();
     }
@@ -62,18 +77,35 @@
       } else {
         const d: any = typeof document !== 'undefined' ? document : null;
         if (d && getFullscreenElement()) {
-          if (d.exitFullscreen) await d.exitFullscreen();
-          else if (d.webkitExitFullscreen) await d.webkitExitFullscreen();
-          else if (d.mozCancelFullScreen) await d.mozCancelFullScreen();
-          else if (d.msExitFullscreen) await d.msExitFullscreen();
+          try {
+            if (d.exitFullscreen) await d.exitFullscreen();
+            else if ((d as any).webkitExitFullscreen) await (d as any).webkitExitFullscreen();
+            else if ((d as any).mozCancelFullScreen) await (d as any).mozCancelFullScreen();
+            else if ((d as any).msExitFullscreen) await (d as any).msExitFullscreen();
+          } catch (err) {
+            console.error('[exitFullscreen] native exit failed:', err);
+          }
         }
       }
+    } catch (e) {
+      console.error('[exitFullscreen] error:', e);
     } finally {
       refreshFullscreenState();
     }
   }
   function toggleFullscreen() {
+    console.log('[ui] fullscreen clicked; current=', isFullscreen);
     if (isFullscreen) exitFullscreen(); else enterFullscreen();
+  }
+
+  // Invert mode: set white background and flip white text to black
+  let isInverted = false;
+  function toggleInvert() {
+    isInverted = !isInverted;
+    console.log('[ui] invert clicked; inverted=', isInverted);
+    if (typeof document !== 'undefined') {
+      document.body.classList.toggle('inverted', isInverted);
+    }
   }
 
   function updateMarqueeWidth() {
@@ -292,6 +324,8 @@
   }
 
   $: currentEpisode, setTimeout(updateMarqueeWidth, 0);
+  $: progressPercent = $playbackState.duration > 0 ? Math.min(100, Math.max(0, ($playbackState.currentTime / $playbackState.duration) * 100)) : 0;
+  $: if (progressFill) progressFill.style.width = `${progressPercent}%`;
 </script>
 
 <svelte:head>
@@ -307,13 +341,13 @@
 <div class="grid" bind:this={appRoot}>
   <!-- LEFT COLUMN -->
   <section class="left pad" role="region" aria-label="Left column" on:copy|preventDefault on:cut|preventDefault on:selectstart|preventDefault on:contextmenu|preventDefault>
-    <div class="code-block mb">
-      <span class="keyword">function</span> <span class="function-name">musicFor</span>(<span class="param">task</span> <span class="operator">=</span> <span class="string">'progra<br />mming'</span>) <span class="brace">&#123;</span> <span class="keyword">return</span> <span class="string">'A series of mi<br />xes intended for listening while<br />$&#123;task&#125; to focus the brain and i<br />nspire the mind.'</span>; <span class="brace">&#125;</span>
-    </div>
+          <div class="code-block mb">
+        <span class="keyword">function</span> <span class="function-name">musicFor</span>(<span class="param">task</span> <span class="operator">=</span> <span class="string">'progra<br />mming'</span>) <span class="brace">&#123;</span> <span class="keyword">return</span> <span class="string">'A series of mi<br />xes intended for listening while<br />$&#123;task&#125; to focus the brain and i<br />nspire the mind.'</span>; <span class="brace">&#125;</span>
+      </div>
 
-    <div bind:this={visualizerWrap} style="width: fit-content;">
-    <AudioVisualizer {isPlaying} />
-    </div>
+      <div class="visualizer-wrap" bind:this={visualizerWrap}>
+      <AudioVisualizer {isPlaying} />
+      </div>
 
     <div class="episode-info mb">
       <div class="current-episode mb">
@@ -372,7 +406,7 @@
         <span class="link-purple hover">[folder.jpg]</span> <span class="link-purple hover">[enterprise mode]</span>
       </div>
       <div class="links-row">
-        <span class="link-purple hover">[invert]</span> <span class="link-purple hover" role="button" tabindex="0" on:click={toggleFullscreen} on:keydown={(e) => e.key==='Enter' && toggleFullscreen()}>
+        <span class="link-purple hover action-link" role="button" tabindex="0" on:click={toggleInvert} on:keydown={(e) => e.key==='Enter' && toggleInvert()}>[invert]</span> <span class="link-purple hover action-link" role="button" tabindex="0" on:click={toggleFullscreen} on:keydown={(e) => e.key==='Enter' && toggleFullscreen()}>
           {#if isFullscreen}[exit]{:else}[fullscreen]{/if}
         </span>
       </div>
@@ -433,9 +467,9 @@
                     {Math.floor($playbackState.duration / 60)}:{String(Math.floor($playbackState.duration % 60)).padStart(2, '0')}
                   </span>
                 </div>
-                <div class="progress-bar" on:click={handleSeek} role="button" tabindex="0" on:keydown={(e) => e.key==='Enter' && (handleSeek(e as any))}>
-                  <div class="progress-fill" style="width: {($playbackState.currentTime / $playbackState.duration) * 100}%"></div>
-                </div>
+                                  <div class="progress-bar" on:click={handleSeek} role="button" tabindex="0" on:keydown={(e) => e.key==='Enter' && (handleSeek(e as any))}>
+                    <div class="progress-fill" bind:this={progressFill}></div>
+                  </div>
               </div>
             {/if}
 
@@ -498,6 +532,8 @@
     position: relative;
     z-index: 2;
   }
+
+
 
   
   .marquee { position: relative; overflow: hidden; white-space: nowrap; color: #898989; }
