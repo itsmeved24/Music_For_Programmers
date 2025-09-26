@@ -28,74 +28,33 @@
   const totalMinutes = Math.floor((totalDurationSeconds % 3600) / 60);
   const totalSeconds = totalDurationSeconds % 60;
 
-  // Fullscreen toggle
+  // Website fullscreen toggle (not browser fullscreen)
   let isFullscreen = false;
-  let sf: any = null;
-  function getFullscreenElement(): Element | null {
-    const d: any = typeof document !== 'undefined' ? document : null;
-    return d?.fullscreenElement || d?.webkitFullscreenElement || d?.mozFullScreenElement || d?.msFullscreenElement || null;
-  }
-  function refreshFullscreenState() {
-    if (typeof document === 'undefined') return;
-    isFullscreen = !!(sf?.isEnabled ? sf.isFullscreen : getFullscreenElement());
-  }
-  async function enterFullscreen() {
-    try {
-      const docEl: any = typeof document !== 'undefined' ? document.documentElement : null;
-      const target: any = (appRoot as any) ?? docEl;
-      if (sf?.isEnabled && target) {
-        await sf.request(target);
-      } else if (target && !getFullscreenElement()) {
-        try {
-          if (target.requestFullscreen) {
-            try {
-              await target.requestFullscreen({ navigationUI: 'hide' } as any);
-            } catch (optErr) {
-              await target.requestFullscreen();
-            }
-          } else if (target.webkitRequestFullscreen) {
-            await target.webkitRequestFullscreen();
-          } else if (target.mozRequestFullScreen) {
-            await target.mozRequestFullScreen();
-          } else if (target.msRequestFullscreen) {
-            await target.msRequestFullscreen();
-          }
-        } catch (err) {
-          console.error('[enterFullscreen] native request failed:', err);
-        }
-      }
-    } catch (e) {
-      console.error('[enterFullscreen] error:', e);
-    } finally {
-      refreshFullscreenState();
-    }
-  }
-  async function exitFullscreen() {
-    try {
-      if (sf?.isEnabled && sf.isFullscreen) {
-        await sf.exit();
-      } else {
-        const d: any = typeof document !== 'undefined' ? document : null;
-        if (d && getFullscreenElement()) {
-          try {
-            if (d.exitFullscreen) await d.exitFullscreen();
-            else if ((d as any).webkitExitFullscreen) await (d as any).webkitExitFullscreen();
-            else if ((d as any).mozCancelFullScreen) await (d as any).mozCancelFullScreen();
-            else if ((d as any).msExitFullscreen) await (d as any).msExitFullscreen();
-          } catch (err) {
-            console.error('[exitFullscreen] native exit failed:', err);
-          }
-        }
-      }
-    } catch (e) {
-      console.error('[exitFullscreen] error:', e);
-    } finally {
-      refreshFullscreenState();
-    }
-  }
+  
   function toggleFullscreen() {
-    console.log('[ui] fullscreen clicked; current=', isFullscreen);
-    if (isFullscreen) exitFullscreen(); else enterFullscreen();
+    console.log('[toggleFullscreen] clicked; current=', isFullscreen);
+    isFullscreen = !isFullscreen;
+    console.log('[toggleFullscreen] new state=', isFullscreen);
+    
+    if (typeof document !== 'undefined') {
+      if (isFullscreen) {
+        console.log('[toggleFullscreen] Adding fullscreen classes');
+        document.body.classList.add('app-fullscreen');
+        document.documentElement.classList.add('app-fullscreen');
+        console.log('[toggleFullscreen] Body classes:', document.body.className);
+        console.log('[toggleFullscreen] HTML classes:', document.documentElement.className);
+      } else {
+        console.log('[toggleFullscreen] Removing fullscreen classes');
+        document.body.classList.remove('app-fullscreen');
+        document.documentElement.classList.remove('app-fullscreen');
+      }
+    }
+    
+    // Force a check of the grid element
+    if (appRoot) {
+      console.log('[toggleFullscreen] Grid element classes:', appRoot.className);
+      console.log('[toggleFullscreen] Grid element computed style position:', window.getComputedStyle(appRoot).position);
+    }
   }
 
   // Invert mode: set white background and flip white text to black
@@ -153,39 +112,12 @@
     setTimeout(updateMarqueeWidth, 0);
     if (typeof window !== 'undefined') {
       window.addEventListener('resize', updateMarqueeWidth);
-      
-      const d: any = document;
-      const handler = () => refreshFullscreenState();
-      d.addEventListener('fullscreenchange', handler);
-      d.addEventListener('webkitfullscreenchange', handler);
-      d.addEventListener('mozfullscreenchange', handler);
-      d.addEventListener('MSFullscreenChange', handler);
-      
-      refreshFullscreenState();
-      (window as any).__fsHandler = handler;
-
-      // Lazy-load screenfull if available
-      import('screenfull').then((mod) => {
-        sf = mod?.default ?? mod;
-        if (sf?.isEnabled) {
-          sf.on('change', handler);
-          refreshFullscreenState();
-        }
-      }).catch(() => {});
     }
   });
 
   onDestroy(() => {
     if (typeof window !== 'undefined') {
       window.removeEventListener('resize', updateMarqueeWidth);
-      const d: any = document;
-      const handler = (window as any).__fsHandler;
-      if (handler) {
-        d.removeEventListener('fullscreenchange', handler);
-        d.removeEventListener('webkitfullscreenchange', handler);
-        d.removeEventListener('mozfullscreenchange', handler);
-        d.removeEventListener('MSFullscreenChange', handler);
-      }
     }
   });
 
@@ -303,14 +235,14 @@
 
   function handlePrevious() {
     if (!currentEpisode || episodes.length === 0) return;
-    const idx = episodes.findIndex(ep => ep.number === currentEpisode.number);
+    const idx = episodes.findIndex(ep => ep.number === currentEpisode!.number);
     const prevIdx = idx > 0 ? idx - 1 : episodes.length - 1;
     handleEpisodeSelect(episodes[prevIdx]);
   }
 
   function handleNext() {
     if (!currentEpisode || episodes.length === 0) return;
-    const idx = episodes.findIndex(ep => ep.number === currentEpisode.number);
+    const idx = episodes.findIndex(ep => ep.number === currentEpisode!.number);
     const nextIdx = idx < episodes.length - 1 ? idx + 1 : 0;
     handleEpisodeSelect(episodes[nextIdx]);
   }
@@ -332,15 +264,15 @@
   <title>musicForCoding</title>
   <meta name="description" content="A series of mixes intended for listening while programming to focus the brain and inspire the mind." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@200;400&display=swap" rel="stylesheet">
   <link rel="icon" href="/favicon.png?v=3" sizes="any" type="image/png">
   <link rel="shortcut icon" href="/favicon.png?v=3" type="image/png">
 </svelte:head>
 
-<div class="grid" bind:this={appRoot}>
+<div class="grid" class:fullscreen={isFullscreen} bind:this={appRoot}>
   <!-- LEFT COLUMN -->
-  <section class="left pad" role="region" aria-label="Left column" on:copy|preventDefault on:cut|preventDefault on:selectstart|preventDefault on:contextmenu|preventDefault>
+  <section class="left pad" role="region" aria-label="Left column" on:contextmenu|preventDefault on:selectstart|preventDefault>
           <div class="code-block mb">
         <span class="keyword">function</span> <span class="function-name">musicFor</span>(<span class="param">task</span> <span class="operator">=</span> <span class="string">'progra<br />mming'</span>) <span class="brace">&#123;</span> <span class="keyword">return</span> <span class="string">'A series of mi<br />xes intended for listening while<br />$&#123;task&#125; to focus the brain and i<br />nspire the mind.'</span>; <span class="brace">&#125;</span>
       </div>
@@ -406,8 +338,9 @@
         <span class="link-purple hover">[folder.jpg]</span> <span class="link-purple hover">[enterprise mode]</span>
       </div>
       <div class="links-row">
-        <span class="link-purple hover action-link" role="button" tabindex="0" on:click={toggleInvert} on:keydown={(e) => e.key==='Enter' && toggleInvert()}>[invert]</span> <span class="link-purple hover action-link" role="button" tabindex="0" on:click={toggleFullscreen} on:keydown={(e) => e.key==='Enter' && toggleFullscreen()}>
-          {#if isFullscreen}[exit]{:else}[fullscreen]{/if}
+        <span class="link-purple hover action-link" role="button" tabindex="0" on:click={toggleInvert} on:keydown={(e) => e.key==='Enter' && toggleInvert()}>[invert]</span> 
+        <span class="link-purple hover action-link" role="button" tabindex="0" on:click|stopPropagation={toggleFullscreen} on:keydown={(e) => e.key==='Enter' && toggleFullscreen()}>
+          {#if isFullscreen}[exit fullscreen]{:else}[enter fullscreen]{/if}
         </span>
       </div>
     </div>
@@ -541,4 +474,57 @@
   .marquee__track.running { animation-play-state: running; }
   .marquee__item { display: inline-block; padding: 0; font-family: 'IBM Plex Mono', monospace; font-size: 18px; letter-spacing: 0.05em; }
   @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* App Fullscreen Mode - Fixed CSS */
+  .grid.fullscreen {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 999999 !important;
+    margin: 0 !important;
+    padding: 20px !important;
+    box-sizing: border-box !important;
+    background: #000 !important;
+    overflow-y: auto !important;
+    grid-template-columns: 1fr 2fr 1fr !important;
+    grid-template-rows: 1fr !important;
+    gap: 20px !important;
+  }
+  
+  /* Fullscreen body styling */
+  :global(body.app-fullscreen) {
+    overflow: hidden !important;
+  }
+  
+  /* Add visual feedback for fullscreen */
+  .grid.fullscreen::before {
+    content: "🔲 FULLSCREEN MODE - Click [exit fullscreen] to return";
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(27, 235, 158, 0.2);
+    color: #1BEB9E;
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 1000000;
+    border: 2px solid #1BEB9E;
+    box-shadow: 0 0 10px rgba(27, 235, 158, 0.3);
+    animation: fullscreen-pulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes fullscreen-pulse {
+    0%, 100% { 
+      box-shadow: 0 0 10px rgba(27, 235, 158, 0.3);
+      transform: scale(1);
+    }
+    50% { 
+      box-shadow: 0 0 20px rgba(27, 235, 158, 0.6);
+      transform: scale(1.02);
+    }
+  }
 </style>

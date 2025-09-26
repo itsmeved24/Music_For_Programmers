@@ -5,7 +5,7 @@
   export let isPlaying: boolean = false;
   
   let visualizerText = "____________________________________";
-  let interval;
+  let interval: ReturnType<typeof setInterval> | null = null;
   
   const symbols = ['_', '-', '=', '≡', '|', '!', '‖', '│', '┃', '┊', '┋', '╎', '╏'];
   
