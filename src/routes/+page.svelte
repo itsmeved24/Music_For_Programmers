@@ -334,15 +334,7 @@
         <span class="link-orange hover">[patreon]</span> <span class="link-orange hover">[podcasts.apple]</span>
       </div>
       -->
-      <div class="links-row">
-        <span class="link-purple hover">[folder.jpg]</span> <span class="link-purple hover">[enterprise mode]</span>
-      </div>
-      <div class="links-row">
-        <span class="link-purple hover action-link" role="button" tabindex="0" on:click={toggleInvert} on:keydown={(e) => e.key==='Enter' && toggleInvert()}>[invert]</span> 
-        <span class="link-purple hover action-link" role="button" tabindex="0" on:click|stopPropagation={toggleFullscreen} on:keydown={(e) => e.key==='Enter' && toggleFullscreen()}>
-          {#if isFullscreen}[exit fullscreen]{:else}[enter fullscreen]{/if}
-        </span>
-      </div>
+
     </div>
 
     <div class="stats-section">
