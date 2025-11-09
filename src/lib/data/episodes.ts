@@ -8,7 +8,7 @@ export const EPISODES: Episode[] = [
     artist: "TalhaAnjum",
     url: "https://archive.org/download/music-for-programming-ep75-datassette/Episode75-TalhaTalwin.mp3",
     sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
-    duration: 1920, 
+    duration: 1941, 
     description: "Talwinder & TalhaAnjum presents a contemporary blend of ambient textures with subtle rhythmic elements. This episode creates an ideal atmosphere for coding sessions, featuring carefully selected tracks that enhance focus and creative flow without overwhelming the listener.",
     releaseDate: new Date('2024-12-15'),
     tags: ['electronic', 'ambient', 'focus', 'programming', 'contemporary'],
