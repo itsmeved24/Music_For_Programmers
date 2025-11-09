@@ -52,25 +52,23 @@ export const EPISODES: Episode[] = [
   {
     id: 3,
     number: 73,
-    title: "[in]anoce",
-    artist: "[in]anoce",
+    title: "Marlboro",
+    artist: "Multiple",
     url: "https://archive.org/download/episode-73-marlboro-gold/Episode73-MarlboroGold.mp3",
     sourcePage: "https://archive.org/details/episode-73-marlboro-gold",
-    duration: 4980, 
-    description: "[in]anoce presents a refined exploration of minimal electronic compositions that blur the boundaries between organic and synthetic sounds. Perfect for analytical thinking and complex algorithm development sessions.",
-    releaseDate: new Date('2024-11-15'),
-    tags: ['minimal', 'electronic', 'programming', 'organic', 'synthetic'],
+    duration: 1193, 
+    description: "A seamless blend of rhythm, reflection, and raw emotion — this playlist moves effortlessly from the laid-back verses of Madira and Video Games by Seedhe Maut to the heartfelt intensity of Juice WRLD’s Lucid Dreams and All Girls Are The Same, finally closing with the soulful calm of Post Malone’s Circles. Each track flows into the next like a wave of creative energy, balancing lyrical depth with mellow beats that help you focus, unwind, and stay in the zone. Whether you’re coding, designing, or just chasing that late-night flow, this set of songs creates the perfect atmosphere — soothing enough to clear your mind, yet vibrant enough to keep your productivity alive.",
+    releaseDate: new Date('2025-11-09'),
+    tags: ['minimal', 'programming', 'organic', 'synthetic', 'mood', 'focus'],
     tracks: [
-      { artist: "[in]anoce", title: "Microscopic" },
-      { artist: "[in]anoce", title: "Cellular Logic" },
-      { artist: "Synthetic Mind", title: "Recursive Patterns" },
-      { artist: "Digital Nature", title: "Binary Trees" },
-      { artist: "[in]anoce", title: "Quantum States" },
-      { artist: "Organic Code", title: "Neural Networks" },
-      { artist: "[in]anoce", title: "Algorithm Poetry" },
-      { artist: "Electronic Dreams", title: "Machine Learning" }
+      { artist: "Post Malone", title: "Circles" },
+      { artist: "Seedhe Maut", title: "Madira" },
+      { artist: "Juice WRLD", title: "All Girls Are The Same" },
+      { artist: "Seedhe Maut", title: "Video Games" },
+      { artist: "Juice WRLD", title: "Lucid Dreams" },
+      { artist: "King", title: "Tum Saath Rehna" },
     ],
-    fileSize: "148 MB"
+    fileSize: "27.4 MB"
   },
   {
     id: 4,
