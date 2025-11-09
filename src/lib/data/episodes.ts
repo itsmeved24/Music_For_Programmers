@@ -57,7 +57,7 @@ export const EPISODES: Episode[] = [
     url: "https://archive.org/download/episode-73-marlboro-gold/Episode73-MarlboroGold.mp3",
     sourcePage: "https://archive.org/details/episode-73-marlboro-gold",
     duration: 1193, 
-    description: "A seamless blend of rhythm, reflection, and raw emotion — this playlist moves effortlessly from the laid-back verses of Madira and Video Games by Seedhe Maut to the heartfelt intensity of Juice WRLD’s Lucid Dreams and All Girls Are The Same, finally closing with the soulful calm of Post Malone’s Circles. Each track flows into the next like a wave of creative energy, balancing lyrical depth with mellow beats that help you focus, unwind, and stay in the zone. Whether you’re coding, designing, or just chasing that late-night flow, this set of songs creates the perfect atmosphere — soothing enough to clear your mind, yet vibrant enough to keep your productivity alive.",
+    description: "A drift through mellow chaos and calm clarity — verses stir quiet thoughts, while confessions bleed into soft melancholy. Each beat hums with emotion, wrapping focus in rhythm and stillness. The kind of soundscape where creativity breathes, and time forgets to move.",
     releaseDate: new Date('2025-11-09'),
     tags: ['minimal', 'programming', 'organic', 'synthetic', 'mood', 'focus'],
     tracks: [
