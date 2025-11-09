@@ -9,10 +9,11 @@ export const EPISODES: Episode[] = [
     url: "https://archive.org/download/music-for-programming-ep75-datassette/Episode75-TalhaTalwin.mp3",
     sourcePage: "https://archive.org/details/music-for-programming-ep75-datassette",
     duration: 1729, 
-    description: "TalhaAnjum presents a contemporary blend of ambient textures with subtle rhythmic elements. This episode creates an ideal atmosphere for coding sessions, featuring carefully selected tracks that enhance focus and creative flow without overwhelming the listener.",
+    description: "Talwinder & TalhaAnjum presents a contemporary blend of ambient textures with subtle rhythmic elements. This episode creates an ideal atmosphere for coding sessions, featuring carefully selected tracks that enhance focus and creative flow without overwhelming the listener.",
     releaseDate: new Date('2024-12-15'),
     tags: ['electronic', 'ambient', 'focus', 'programming', 'contemporary'],
     tracks: [
+      { title: "Wishes", artist: "Talwiinder" },
       { title: "Pal-Pal", artist: "Talwiinder" },
       { title: "Downers at Dusk", artist: "Talha Anjum" },
       { title: "Afsanay", artist: "Young Stunners" },
@@ -23,7 +24,7 @@ export const EPISODES: Episode[] = [
       { title: "Tere Saath", artist: "Talwiinder, Vylom" },
 
     ],
-    fileSize: "39.6 MB"
+    fileSize: "44.5 MB"
   },
   {
     id: 2,
