@@ -56,7 +56,7 @@ export const EPISODES: Episode[] = [
     artist: "Multiple",
     url: "https://archive.org/download/episode-73-marlboro-gold/Episode73-MarlboroGold.mp3",
     sourcePage: "https://archive.org/details/episode-73-marlboro-gold",
-    duration: 1193, 
+    duration: 1186, 
     description: "A drift through mellow chaos and calm clarity — verses stir quiet thoughts, while confessions bleed into soft melancholy. Each beat hums with emotion, wrapping focus in rhythm and stillness. The kind of soundscape where creativity breathes, and time forgets to move.",
     releaseDate: new Date('2025-11-09'),
     tags: ['minimal', 'programming', 'organic', 'synthetic', 'mood', 'focus'],
